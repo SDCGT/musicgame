@@ -1,0 +1,4 @@
+repository "musicgame@sdcgt666@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"
