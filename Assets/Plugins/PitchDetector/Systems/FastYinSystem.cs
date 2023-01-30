@@ -18,7 +18,7 @@ public class FastYinSystem : ComponentSystem
 
     protected override void OnCreate()
     {
-        base.OnCreate();
+      /*  base.OnCreate();
 
         var query = new EntityQueryDesc()
         {
@@ -28,9 +28,11 @@ public class FastYinSystem : ComponentSystem
         //pitchDetectors = GetComponentGroup(query);
 
         fastYin = new FastYin(44100, 1024);
+      */
     }
     protected override void OnUpdate()
     {
+        /*
         Entities.ForEach((PitchDetector detector) =>
         {
             if (detector.Source == null)
@@ -55,7 +57,7 @@ public class FastYinSystem : ComponentSystem
             detector.MidiNote = midiNote;
             detector.MidiCents = midiCents;
         //}, pitchDetectors);
-        });
+        });*/
     }
 
 }

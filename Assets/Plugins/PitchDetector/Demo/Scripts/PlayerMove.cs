@@ -13,6 +13,7 @@ namespace FinerGames.PitchDetector.Demo
         [SerializeField] float tickInterval = 0.01f;
         // Start is called before the first frame update
         public Transform player;
+        public SpriteRenderer playerMesh;
         float pitch = 0;
         void Start()
         {
@@ -23,7 +24,15 @@ namespace FinerGames.PitchDetector.Demo
         void Update()
         {
             pitch = detector.MidiNote;
-            player.transform.position = new Vector3(0, pitch*0.06f, 0);
+            player.transform.position = new Vector3(0, pitch*0.2f-10f, 0);
+            if(pitch<40)
+            {
+                playerMesh.color = new Color(0, 0, 0, 0);
+            }
+            else
+            {
+                playerMesh.color = new Color(255, 255, 255);
+            }
         }
     }
 }
