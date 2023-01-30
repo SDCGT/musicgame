@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetRotate : MonoBehaviour
+public class Star : MonoBehaviour
 {
+    public GameObject planet;
     // Start is called before the first frame update
-    public Transform planet;
     void Start()
     {
+        //planet = GameObject.FindGameObjectWithTag("planet");
+        //this.transform.parent = planet.transform;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        planet.Rotate(new Vector3(0,0,1),1);
+        
     }
 }

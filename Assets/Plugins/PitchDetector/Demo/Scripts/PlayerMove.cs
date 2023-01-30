@@ -24,7 +24,7 @@ namespace FinerGames.PitchDetector.Demo
         void Update()
         {
             pitch = detector.MidiNote;
-            player.transform.position = new Vector3(0, pitch*0.2f-10f, 0);
+            player.transform.position = new Vector3(0, pitch*0.35f-20f, 0);
             if(pitch<40)
             {
                 playerMesh.color = new Color(0, 0, 0, 0);
