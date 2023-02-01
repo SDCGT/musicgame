@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Plugins/PitchDetector/Demo/Scenes/DemoScene.unity
+    guid: fcb9d1ead922942938c6c3c5945b2b93
   m_configObjects: {}
