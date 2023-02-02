@@ -6,6 +6,7 @@ public class ClearStar : MonoBehaviour
 {
     // Start is called before the first frame update
     //public Collider2D collider;
+    public GameObject star;
     void Start()
     {
 
@@ -20,7 +21,8 @@ public class ClearStar : MonoBehaviour
     {
        if( collision.tag=="clearStar")
        {
-            Destroy(this);
+            Debug.Log("!!111");
+            Destroy(star);
         }
     }
 }

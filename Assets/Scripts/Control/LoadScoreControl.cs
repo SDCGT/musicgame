@@ -53,9 +53,9 @@ namespace control
             // 遍历musicxml目录里的所有xml文件
             DirectoryInfo xmlFolder = new DirectoryInfo(_commonParams.GetXmlFolderPath());
 
-            int xmlFileCount = 0;
-            Vector3 buttonPosition = new Vector3(Screen.width/2, Screen.height - 100, 0);
-            foreach (FileInfo xmlFile in xmlFolder.GetFiles())
+            //int xmlFileCount = 0;
+            //Vector3 buttonPosition = new Vector3(Screen.width/2, Screen.height - 100, 0);
+            /*foreach (FileInfo xmlFile in xmlFolder.GetFiles())
             {
                 if (xmlFile.Extension == ".xml")
                 {
@@ -65,27 +65,27 @@ namespace control
                         break;
                     }
 
-                    string buttonName = "Button" + xmlFileCount;
-                    GameObject buttonObject = GameObject.Instantiate(_commonParams.GetPrefabFileButton(),
-                        canvasObject.transform.position, _commonParams.GetPrefabFileButton().transform.rotation);
-                    buttonObject.name = buttonName;
-                    buttonObject.transform.SetParent(canvasObject.transform);
-                    RectTransform rect = buttonObject.GetComponent<RectTransform>();
+                    //string buttonName = "Button" + xmlFileCount;
+                   // GameObject buttonObject = GameObject.Instantiate(_commonParams.GetPrefabFileButton(),
+                      //  canvasObject.transform.position, _commonParams.GetPrefabFileButton().transform.rotation);
+                    //buttonObject.name = buttonName;
+                    //buttonObject.transform.SetParent(canvasObject.transform);
+                    //RectTransform rect = buttonObject.GetComponent<RectTransform>();
                     // 设置位置为以画布左下角为坐标原点
-                    rect.position = new Vector3(buttonPosition.x,
-                        buttonPosition.y - 50 * xmlFileCount,
-                        buttonPosition.z);
-                    Text btnText = buttonObject.GetComponentInChildren<Text>();
-                    btnText.text = xmlFile.Name.Replace(xmlFile.Extension, ""); // 设置button显示文字为去掉扩展名的文件名
+                    //rect.position = new Vector3(buttonPosition.x,
+                       // buttonPosition.y - 50 * xmlFileCount,
+                       // buttonPosition.z);
+                    //Text btnText = buttonObject.GetComponentInChildren<Text>();
+                    //btnText.text = xmlFile.Name.Replace(xmlFile.Extension, ""); // 设置button显示文字为去掉扩展名的文件名
 
-                    Button button = buttonObject.GetComponent<Button>();
-                    button.onClick.AddListener(delegate
+                    //Button button = buttonObject.GetComponent<Button>();
+                   button.onClick.AddListener(delegate
                     {
                         _commonParams.SetScoreName(xmlFile.FullName); // 设置要加载的xml文件名
                         SceneManager.LoadScene("DemoScene");
                     });
-                }
-            }
+               }
+            }*/
         }
     }
 }

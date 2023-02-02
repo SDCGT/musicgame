@@ -44,9 +44,6 @@ namespace control
             // 乐谱名称和作者信息
             scoreInfo.Add(xmlFacade.GetWorkTitle()); // 0
             scoreInfo.Add(xmlFacade.GetCreator()); // 1
-            Debug.Log("scorelist"+scoreList.Count);
-            Debug.Log("screenSize" + screenSize);
-            Debug.Log("scoreInfo" + scoreInfo[1]);
             // 绘制乐谱视图
             ScoreView scoreView = new ScoreView(scoreList, parentObject, screenSize, scoreInfo);
 
