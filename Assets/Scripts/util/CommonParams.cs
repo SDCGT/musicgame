@@ -7,7 +7,7 @@ namespace util
         private static CommonParams instance = new CommonParams();
 
         // 作为公共数据存储类
-        private string _scoreName = "Assets/Materials/MusicXml/印第安鼓.xml";
+        private string _scoreName = "Assets/Materials/MusicXml/2.xml";
         private string _xmlFolderPath = "Assets/Materials/MusicXml";
         private GameObject _prefabSymbol;
         private GameObject _prefabText;
