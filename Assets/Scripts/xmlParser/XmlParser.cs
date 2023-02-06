@@ -31,6 +31,7 @@ namespace xmlParser
         private string _stem = ""; // 符干方向
         private string _beam = ""; //  符杠
         private string _beamNum = ""; //  符杠序号
+        private string _perminute = "";//节奏型
         private Symbol _symbol;
         private Beat _beat;
         private Head _highHead;
@@ -92,6 +93,7 @@ namespace xmlParser
                             case "accidental": _accidental = xmlReader.ReadString(); break;
                             case "staff": _staff = xmlReader.ReadString(); break;
                             case "stem": _stem = xmlReader.ReadString(); break;
+                            case "per-minute":_perminute = xmlReader.ReadString(); break;
                             case "beam":
                                 _beamNum = xmlReader.GetAttribute("number");
                                 if (_beamNum.Equals("1"))
@@ -269,6 +271,10 @@ namespace xmlParser
 
         public List<Measure> GetMeasureList() { return _measureList; }
 
+        public int GetAllBeats() { return _highTime; }
+
+        public string GetPerMinute() { return _perminute; }
+        
         private int GetStandard() {
             int standard = 0;
             switch (_sign)
