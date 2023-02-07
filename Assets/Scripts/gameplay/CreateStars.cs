@@ -13,7 +13,7 @@ namespace xmlParser
         public GameObject star;
 
         public Transform planet;
-        float midiID=0;
+        int midiID=0;
         XmlParser parser = new XmlParser("Assets/Materials/MusicXml/2.xml");
         private List<Symbol> SymbolMeasure = new List<Symbol>();
         private List<Note> NoteList = new List<Note>();
@@ -60,11 +60,19 @@ namespace xmlParser
             if (start)
             {
                 time += Time.deltaTime;
-                if ((time * 10 % 5 < 0.2))
+                if ((time * 10 % 5 < 0.5))
                 {
                     midiID = GetMIDIID(time);
-                    Debug.Log(midiID);
-                    Instantiate(star, new Vector3(15 + midiID*5, -16, 0), new Quaternion(0, 0, 0, 0), planet.transform);
+                    Debug.Log("in start:" + midiID);
+                    if(midiID != 0)
+                    {
+                        Debug.Log("in midiID:" + midiID);
+                        GameObject star1 = Instantiate(star, new Vector3(12 + midiID*0.3f, -16, 0), new Quaternion(0, 0, 0, 0), planet.transform);
+                        //star1.SetActive(true);
+                       
+                        Debug.Log("out midiID:" + midiID);
+                    }
+ 
                 }
             }
         }
@@ -109,7 +117,7 @@ namespace xmlParser
                 if((time-SymbolMeasure[i].GetStartTime())<0.1f&& (time - SymbolMeasure[i].GetStartTime())>0)
                 {
                     MidiID = GetDigitizedPitch(NoteList[i].GetStep(), NoteList[i].GetOctave());
-                    //Debug.Log(MidiID);
+                    Debug.Log("in GetDigitizedPitch:" + MidiID);
                 }
             }
             return MidiID;
