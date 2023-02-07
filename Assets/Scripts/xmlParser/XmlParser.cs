@@ -44,6 +44,7 @@ namespace xmlParser
         private List<Symbol> _highSymbolList = new List<Symbol>(); // 高音乐符列表
         private List<Symbol> _lowSymbolList = new List<Symbol>(); // 低音乐符列表
 
+        private List<Note> _highNoteMeasure = new List<Note>();//保存音高
         private List<Symbol> _highSymbolMeasure = new List<Symbol>(); // 一节中的高音乐符
         private List<Symbol> _lowSymbolMeasure = new List<Symbol>(); // 一节中的低音乐符
         private List<List<List<Symbol>>> _measureSymbolList = new List<List<List<Symbol>>>(); // 小节乐符列表
@@ -141,6 +142,7 @@ namespace xmlParser
                             _symbol = new Note(_step, _octave);
                             _symbol.SetChord(_isChord);
                             _isChord = false;
+                            _highNoteMeasure.Add(new Note(_step, _octave));
                         }
 
                         if (xmlReader.Name.Equals("dot"))
@@ -157,6 +159,7 @@ namespace xmlParser
                             bool isNote = _symbol is Note;
                             if (isNote)
                             {
+                                
                                 ((Note) _symbol).SetAccidental(_accidental);
                                 _accidental = "";
                                 if (_stem.Equals("up")) ((Note) _symbol).SetUpOrDown(true);
@@ -178,8 +181,8 @@ namespace xmlParser
                                 }
                                 else
                                 {
-                                    _symbol.SetStartTime(_highTime);
-                                    _symbol.SetStopTime((_highTime += _symbol.GetDuration()));
+                                    //_symbol.SetStartTime(_highTime);
+                                    //_symbol.SetStopTime((_highTime += _symbol.GetDuration()));
                                     _highSymbolList.Add(_symbol);
                                     _highSymbolMeasure.Add(_symbol);
                                 }
@@ -271,7 +274,9 @@ namespace xmlParser
 
         public List<Measure> GetMeasureList() { return _measureList; }
 
-        public int GetAllBeats() { return _highTime; }
+        public List<Note> GetNoteList() { return _highNoteMeasure; }
+
+        public int GetAllDuration() { return _highTime; }
 
         public string GetPerMinute() { return _perminute; }
         
@@ -377,7 +382,7 @@ namespace xmlParser
         }
 
         // 将小节中按照音符时长分组，返回整个小节的总duration
-        private int ArrangeMeasure()
+        public int ArrangeMeasure()
         {
             int i = 0;
             int j = 0;
@@ -416,6 +421,7 @@ namespace xmlParser
                 _measureSymbolList.Add(setList);
             }
             return i >= j ? i : j;
+            
         }
     }
 }
