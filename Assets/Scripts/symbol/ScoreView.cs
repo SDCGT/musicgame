@@ -100,10 +100,10 @@ namespace symbol
             Button backButton = backButtonObject.GetComponent<Button>();
             backButton.onClick.AddListener(delegate
             {
-                SceneManager.LoadScene("LoadScore");
+                SceneManager.LoadScene("StartScene");
             });
 
-            // 退出按钮
+            // 重启按钮
             GameObject exitButtonObject = GameObject.Instantiate(_commonParams.GetPrefabFileButton(),
                 _parentObject.transform.position, _commonParams.GetPrefabFileButton().transform.rotation);
             exitButtonObject.transform.SetParent(_parentObject.transform);
@@ -115,7 +115,8 @@ namespace symbol
             Button exitButton = exitButtonObject.GetComponent<Button>();
             exitButton.onClick.AddListener(delegate
             {
-                Application.Quit();
+                SystemCtrl.ResumeGame();
+                //Application.Quit();
             });
         }
     }

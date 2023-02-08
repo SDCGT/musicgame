@@ -21,7 +21,7 @@ public class ClearStar : MonoBehaviour
     {
        if( collision.tag=="clearStar")
        {
-            Debug.Log("!!111");
+            //Debug.Log("!!111");
             Destroy(star);
         }
     }
