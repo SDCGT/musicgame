@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Plugins/PitchDetector/Demo/Scenes/StartScene.unity
+    path: Assets/Plugins/PitchDetector/Demo/Scenes/LogInScene.unity
     guid: fcb9d1ead922942938c6c3c5945b2b93
   - enabled: 1
     path: Assets/Plugins/PitchDetector/Demo/Scenes/LevelScene.unity
     guid: 927ad3dbce94ee54aab64f82bc805ef5
+  - enabled: 1
+    path: Assets/Plugins/PitchDetector/Demo/Scenes/StartScene.unity
+    guid: ed09a573d9f456f429663a360e749d99
   m_configObjects: {}

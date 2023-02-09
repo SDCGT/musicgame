@@ -12,4 +12,9 @@ public class ChangeScenes : MonoBehaviour
     {
         SceneManager.LoadScene("LevelScene");
     }
+    
+    public void LoadStartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }
