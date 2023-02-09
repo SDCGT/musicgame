@@ -24,7 +24,7 @@ namespace FinerGames.PitchDetector.Demo
         void Update()
         {
             pitch = detector.MidiNote;
-            player.transform.position = new Vector3(0, pitch*0.35f-20f, 0);
+            player.transform.position = new Vector3(0, pitch*0.3f-15f, 0);
             if(pitch<40)
             {
                 playerMesh.color = new Color(0, 0, 0, 0);
@@ -32,6 +32,16 @@ namespace FinerGames.PitchDetector.Demo
             else
             {
                 playerMesh.color = new Color(255, 255, 255);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "star")
+            {
+                Debug.Log("addScore");
+
+                Destroy(collision.gameObject);
             }
         }
     }
