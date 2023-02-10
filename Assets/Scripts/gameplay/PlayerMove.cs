@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Pitch;
 using UnityEngine;
-
+using TMPro;
 
 namespace FinerGames.PitchDetector.Demo
 {
@@ -15,17 +15,21 @@ namespace FinerGames.PitchDetector.Demo
         public Transform player;
         public SpriteRenderer playerMesh;
         float pitch = 0;
+        public TMP_Text score;
+        private List<double> singPitchList = new List<double>();
         void Start()
         {
 
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             pitch = detector.MidiNote;
+            Debug.Log("singFrequent" + detector.Pitch);
+            singPitchList.Add(detector.Pitch);
             player.transform.position = new Vector3(0, pitch*0.3f-15f, 0);
-            if(pitch<40)
+            if(pitch<40)//可视性调整
             {
                 playerMesh.color = new Color(0, 0, 0, 0);
             }
@@ -33,6 +37,7 @@ namespace FinerGames.PitchDetector.Demo
             {
                 playerMesh.color = new Color(255, 255, 255);
             }
+            PitchRecord.SetSingPitchList(singPitchList);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -40,7 +45,12 @@ namespace FinerGames.PitchDetector.Demo
             if (collision.tag == "star")
             {
                 Debug.Log("addScore");
-
+                string scorestr;
+                int scoreint;
+                scorestr = score.text.ToString();
+                int.TryParse(scorestr, out scoreint);
+                scoreint +=1;
+                score.text = scoreint.ToString();
                 Destroy(collision.gameObject);
             }
         }

@@ -14,9 +14,11 @@ namespace xmlParser
 
         public Transform planet;
         int midiID=0;
+        double frequent = 0;
         XmlParser parser = new XmlParser("Assets/Materials/MusicXml/2.xml");
         private List<Symbol> SymbolMeasure = new List<Symbol>();
         private List<Note> NoteList = new List<Note>();
+        private List<double> ScorePitchList = new List<double>();
 
         private Beat beat;
         int beattypeint;
@@ -37,7 +39,7 @@ namespace xmlParser
         void Start()
         {
             NoteList = parser.GetNoteList();
-            Debug.Log("NoteCount" + NoteList.Count);
+            //Debug.Log("NoteCount" + NoteList.Count);
             measureCount = parser.GetMeasureList().Count;
             SymbolMeasure = parser.GetHighSymbolList();
             beat = parser.GetBeat();
@@ -59,6 +61,10 @@ namespace xmlParser
         // Update is called once per frame
         void FixedUpdate()
         {
+            frequent = 440 * Mathf.Pow(2, (midiID - 69) / 12);
+            Debug.Log(midiID+"scoreFrequent" + frequent);
+            ScorePitchList.Add(frequent);
+            PitchRecord.SetScorePitchList(ScorePitchList);
             if (Input.GetKeyDown(KeyCode.Space))  //按下空格键后开始
             {
                 start = true;
@@ -67,7 +73,7 @@ namespace xmlParser
             if (start&&time<endTime)//曲目时间内，使用MIDIID生成星星
             {
                 time += Time.deltaTime;
-                if ((time * 10 % 5 < 0.2))
+                if ((time * 10 % 5 < 0.3))
                 {
                     midiID = GetMIDIID(time);
                     //Debug.Log("in start:" + midiID);
@@ -119,7 +125,7 @@ namespace xmlParser
                     if(i < NoteList.Count)
                     {
                         MidiID = GetDigitizedPitch(NoteList[i].GetStep(), NoteList[i].GetOctave());
-                        Debug.Log("in GetDigitizedPitch:" + MidiID);
+                        //Debug.Log("in GetDigitizedPitch:" + MidiID);
                     }
                     if(i>=NoteList.Count)//此处代码有很大问题需要修改
                     {
@@ -152,7 +158,7 @@ namespace xmlParser
         {
             float BeatsPercent = allBeats * 1.0f / (1.0f * perminute);
             endTime = BeatsPercent * 60.0f;
-            Debug.Log(endTime);
+            //Debug.Log(endTime);
         }
     }
 }
