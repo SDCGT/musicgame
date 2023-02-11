@@ -78,7 +78,7 @@ namespace control
                     //Text btnText = buttonObject.GetComponentInChildren<Text>();
                     //btnText.text = xmlFile.Name.Replace(xmlFile.Extension, ""); // 设置button显示文字为去掉扩展名的文件名
 
-                    //Button button = buttonObject.GetComponent<Button>();
+                    //Button button = buttonObject.GetComponent<Button >();
                    button.onClick.AddListener(delegate
                     {
                         _commonParams.SetScoreName(xmlFile.FullName); // 设置要加载的xml文件名

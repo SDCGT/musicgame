@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SystemCtrl : MonoBehaviour
 {
-    void PauseGame()
+    public static void PauseGame()
     {
         Time.timeScale = 0;
     }
