@@ -9,9 +9,12 @@ namespace xmlParser
 {
     public class MusicInfo : MonoBehaviour
     {
+        private static MusicInfo instance = new MusicInfo();
+
         int midiID = -1;
         double frequent = 0;
-        XmlParser parser = new XmlParser("Assets/Materials/MusicXml/2.xml");
+        string ScoreName = CommonParams.GetInstance().GetScoreName();
+        XmlParser parser;
         private List<Symbol> SymbolMeasure = new List<Symbol>();
         private List<Note> NoteList = new List<Note>();
         private List<double> ScorePitchList = new List<double>();
@@ -26,10 +29,13 @@ namespace xmlParser
         int measureCount;
         public Timer time;
 
+        public static MusicInfo GetInstance() { return instance; }
+
         // Start is called before the first frame update
 
         private void Awake()
         {
+            XmlParser parser = new XmlParser(ScoreName);
             NoteList = parser.GetNoteList();
             //Debug.Log("NoteCount" + NoteList.Count);
             measureCount = parser.GetMeasureList().Count;
@@ -57,11 +63,11 @@ namespace xmlParser
         void FixedUpdate()
         {
             frequent = 440 * Mathf.Pow(2, (midiID - 69) / 12);
-            Debug.Log(midiID + "scoreFrequent" + frequent);
+            //Debug.Log(midiID + "scoreFrequent" + frequent);
             ScorePitchList.Add(frequent);
             PitchRecord.SetScorePitchList(ScorePitchList);
 
-            Debug.Log(time.GetGameTime());
+            //Debug.Log(time.GetGameTime());
             if (0<time.GetGameTime() && time.GetGameTime()< endTime)//曲目时间内，获取曲目当前音高
             {
               midiID = GetMIDIID(time.GetGameTime());
@@ -144,7 +150,7 @@ namespace xmlParser
             float BeatsPercent = allBeats * 1.0f / (1.0f * perminute);
             endTime = BeatsPercent * 60.0f;
             StaticMusicInfo.SetEndTime(endTime);
-            Debug.Log("1234"+endTime);
+            Debug.Log("BeatsPercent" + perminute);
         }
 
         public float GetEndTime()

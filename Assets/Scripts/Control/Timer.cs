@@ -7,7 +7,7 @@ namespace xmlParser
 {
     public class Timer : MonoBehaviour
     {
-        // Start is called before the first frame update
+
         float playTime = 0;//视唱已持续时间
         float endTime = 0;//视唱结束时间
         bool start = false;
@@ -30,7 +30,7 @@ namespace xmlParser
             if (start && playTime < endTime)//曲目时间内，计时器运作
             {
                 playTime += Time.deltaTime;
-                Debug.Log("playtime" + playTime);
+                //Debug.Log("playtime" + playTime);
             }
 
             if (start && playTime >= endTime)

@@ -10,7 +10,7 @@ namespace FinerGames.PitchDetector.Demo
     {
         [SerializeField] PitchDetector detector;
 
-        [SerializeField] float tickInterval = 0.01f;
+        //[SerializeField] float tickInterval = 0.01f;
         // Start is called before the first frame update
         public Transform player;
         public SpriteRenderer playerMesh;
@@ -26,9 +26,10 @@ namespace FinerGames.PitchDetector.Demo
         void FixedUpdate()
         {
             pitch = detector.MidiNote;
-            Debug.Log("singFrequent" + detector.Pitch);
+            Debug.Log("singFrequent" + pitch);
+            //Debug.Log("singName" + detector.MidiNote);
             singPitchList.Add(detector.Pitch);
-            player.transform.position = new Vector3(0, pitch*0.3f-15f, 0);
+            player.transform.position = new Vector3(0, pitch*0.31f-15f, 0);
             if(pitch<40)//可视性调整
             {
                 playerMesh.color = new Color(0, 0, 0, 0);

@@ -19,6 +19,7 @@ namespace xmlParser
         public float offset = 0.3f;
 
         int midiID=-1;
+        public Timer time;
 
         void Start()
         {
@@ -31,7 +32,11 @@ namespace xmlParser
             midiID = musicinfo1.GetMidiID();
             if(midiID!=-1)
             {
-                GameObject star1 = Instantiate(star, new Vector3(center + offset * midiID, -16, 0), new Quaternion(0, 0, 0, 0), planet.transform);
+                if(time.GetGameTime()*10%3<0.3)
+                {
+                    GameObject star1 = Instantiate(star, new Vector3(center + offset * midiID, -16, 0), new Quaternion(0, 0, 0, 0), planet.transform);
+                }
+
             }
         }
     }

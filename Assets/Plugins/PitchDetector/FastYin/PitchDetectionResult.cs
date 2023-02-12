@@ -1,4 +1,8 @@
-﻿public class PitchDetectionResult
+﻿using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
+
+public class PitchDetectionResult
 {
     /**
      * The pitch in Hertz.

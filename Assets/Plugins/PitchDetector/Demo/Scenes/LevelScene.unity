@@ -557,7 +557,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detector: {fileID: 814806536}
-  tickInterval: 0.01
   player: {fileID: 432811907}
   playerMesh: {fileID: 432811906}
   score: {fileID: 583977649}
@@ -622,7 +621,7 @@ Transform:
   m_GameObject: {fileID: 432811904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -865,6 +864,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583977647}
   m_CullTransparentMesh: 1
+--- !u!1 &620204411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620204412}
+  m_Layer: 0
+  m_Name: PlayBeat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &620204412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620204411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.6849252, y: -16.86704, z: 10.241807}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &718943326 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2582654086758417668, guid: 48dc4812478e7a846b0e153ed0311727, type: 3}
@@ -1125,6 +1155,7 @@ MonoBehaviour:
   musicinfo1: {fileID: 131948316}
   center: 6
   offset: 0.6
+  time: {fileID: 251573236}
 --- !u!1 &997995885
 GameObject:
   m_ObjectHideFlags: 0
