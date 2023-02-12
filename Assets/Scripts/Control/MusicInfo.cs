@@ -162,5 +162,10 @@ namespace xmlParser
         {
             return midiID;
         }
+
+        public int GetPerminute()
+        {
+            return perminute;
+        }
     }
 }

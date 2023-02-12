@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace xmlParser
-{
     public class Timer : MonoBehaviour
     {
 
@@ -42,5 +40,9 @@ namespace xmlParser
         {
             return playTime;
         }
+
+        public bool GetStartBool()
+        {
+            return start;
+        }
     }
-}
