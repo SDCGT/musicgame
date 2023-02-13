@@ -35,93 +35,98 @@ namespace xmlParser
 
         private void Awake()
         {
-            XmlParser parser = new XmlParser(ScoreName);
-            NoteList = parser.GetNoteList();
-            //Debug.Log("NoteCount" + NoteList.Count);
-            measureCount = parser.GetMeasureList().Count;
-            SymbolMeasure = parser.GetHighSymbolList();
-            beat = parser.GetBeat();
+            XmlParser parser = new XmlParser(instance.ScoreName);
+            instance.NoteList = parser.GetNoteList();
             string perminutestr = parser.GetPerMinute();
+            int.TryParse(perminutestr, out instance.perminute);
+            //Debug.Log("NoteCount" + NoteList.Count);
+            instance.measureCount = parser.GetMeasureList().Count;
+            instance.SymbolMeasure = parser.GetHighSymbolList();
+            instance.beat = parser.GetBeat();
+
             CountAllDuration();
-            int.TryParse(perminutestr, out perminute);
-            int.TryParse(beat.GetBeats(), out beatint);
-            int.TryParse(beat.GetBeatType(), out beattypeint);
+
+            int.TryParse(instance.beat.GetBeats(), out instance.beatint);
+            int.TryParse(instance.beat.GetBeatType(), out instance.beattypeint);
             //Debug.Log(SymbolMeasure.Count);
             //Debug.Log(measureCount);
             //Debug.Log(perminute);
-            allBeats = beattypeint * measureCount;
+            instance.allBeats = instance.beattypeint * instance.measureCount;
             //Debug.Log(allBeats);
             //Debug.Log(perminute);
             TotalTime();
+            SetStartTime();
         }
         void Start()
         {
-            SetStartTime();
+
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            frequent = 440 * Mathf.Pow(2, (midiID - 69) / 12);
+            instance.frequent = 440 * Mathf.Pow(2, (instance.midiID - 69) / 12);
             //Debug.Log(midiID + "scoreFrequent" + frequent);
-            ScorePitchList.Add(frequent);
-            PitchRecord.SetScorePitchList(ScorePitchList);
+            instance.ScorePitchList.Add(frequent);
+            PitchRecord.SetScorePitchList(instance.ScorePitchList);
 
             //Debug.Log(time.GetGameTime());
-            if (0<time.GetGameTime() && time.GetGameTime()< endTime)//曲目时间内，获取曲目当前音高
+            if (0<time.GetGameTime() && time.GetGameTime()< instance.endTime)//曲目时间内，获取曲目当前音高
             {
-              midiID = GetMIDIID(time.GetGameTime());
+                instance.midiID = GetMIDIID(time.GetGameTime());
+                Debug.Log("MIDIID" + instance.midiID);
+
             }
 
-            if (time.GetGameTime() >= endTime)
+            if (time.GetGameTime() >= instance.endTime)
             {
-                midiID = 0;
+                instance.midiID = 0;
             }
         }
 
         void CountAllDuration()//计算duration总和
         {
 
-            for (int i = 0; i < SymbolMeasure.Count; i++)
+            for (int i = 0; i < instance.SymbolMeasure.Count; i++)
             {
-                allduration = allduration + SymbolMeasure[i].GetDuration();
+                instance.allduration = instance.allduration + instance.SymbolMeasure[i].GetDuration();
             }
         }
 
         void SetStartTime()//设置每个Symbol的起始时间
         {
             float starttime = 0;
-            for (int i = 0; i < SymbolMeasure.Count; i++)
+            for (int i = 0; i < instance.SymbolMeasure.Count; i++)
             {
-                if (allduration != 0)
+                if (instance.allduration != 0)
                 {
-                    int duration = SymbolMeasure[i].GetDuration();
+                    int duration = instance.SymbolMeasure[i].GetDuration();
                     //Debug.Log(perminute);
-                    float durationPercent = duration * 1.0f / (1.0f * allduration);
-                    float BeatsPercent = allBeats * 1.0f / (1.0f * perminute);
+                    float durationPercent = duration * 1.0f / (1.0f * instance.allduration);
+                    float BeatsPercent = instance.allBeats * 1.0f / (1.0f * instance.perminute);
                     float durationTime = durationPercent * BeatsPercent * 60;
                     starttime = starttime + durationTime;
-                    SymbolMeasure[i].SetStartTime(starttime);
+                    instance.SymbolMeasure[i].SetStartTime(starttime);
                     //Debug.Log(SymbolMeasure[i].GetStartTime());
                 }
             }
         }
         int GetMIDIID(float time)//按时间节点获取音高
         {
-            int MidiID = midiID;
-            for (int i = 0; i < SymbolMeasure.Count; i++)
+            int MidiID = instance.midiID;
+            for (int i = 0; i < instance.SymbolMeasure.Count; i++)
             {
-                if ((time - SymbolMeasure[i].GetStartTime()) < 0.1f && (time - SymbolMeasure[i].GetStartTime()) > 0)
+                if ((time - instance.SymbolMeasure[i].GetStartTime()) < 0.1f && (time - instance.SymbolMeasure[i].GetStartTime()) > 0)
                 {
-                    if (i < NoteList.Count)
+                    if (i < instance.NoteList.Count)
                     {
-                        MidiID = GetDigitizedPitch(NoteList[i].GetStep(), NoteList[i].GetOctave());
+                        MidiID = GetDigitizedPitch(instance.NoteList[i].GetStep(), instance.NoteList[i].GetOctave());
                         //Debug.Log("in GetDigitizedPitch:" + MidiID);
                     }
-                    if (i >= NoteList.Count)//此处代码有很大问题需要修改
+                    if (i >= instance.NoteList.Count)//此处代码有很大问题需要修改
                     {
-                        midiID = 0;//表示休止
-                        Debug.Log("等于0时" + midiID);
+                        instance.midiID = 0;//表示休止
+                        Debug.Log("等于0时" + instance.midiID);
                     }
                 }
             }
@@ -147,25 +152,30 @@ namespace xmlParser
 
         void TotalTime()//计算曲目总时长
         {
-            float BeatsPercent = allBeats * 1.0f / (1.0f * perminute);
-            endTime = BeatsPercent * 60.0f;
-            StaticMusicInfo.SetEndTime(endTime);
-            Debug.Log("BeatsPercent" + perminute);
+            float BeatsPercent = instance.allBeats * 1.0f / (1.0f * instance.perminute);
+            instance.endTime = BeatsPercent * 60.0f;
+            StaticMusicInfo.SetEndTime(instance.endTime);
+            Debug.Log("BeatsPercent" + instance.perminute);
         }
 
         public float GetEndTime()
         {
-            return endTime;
+            return instance.endTime;
         }
 
         public int GetMidiID()
         {
-            return midiID;
+            return instance.midiID;
         }
 
         public int GetPerminute()
         {
-            return perminute;
+            return instance.perminute;
+        }
+
+        public int GetBeat()
+        {
+            return instance.beatint;
         }
     }
 }

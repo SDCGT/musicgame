@@ -26,7 +26,7 @@ namespace FinerGames.PitchDetector.Demo
         void FixedUpdate()
         {
             pitch = detector.MidiNote;
-            Debug.Log("singFrequent" + pitch);
+            //Debug.Log("singFrequent" + pitch);
             //Debug.Log("singName" + detector.MidiNote);
             singPitchList.Add(detector.Pitch);
             player.transform.position = new Vector3(0, pitch*0.31f-15f, 0);

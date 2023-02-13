@@ -6,7 +6,7 @@ using UnityEngine;
     public class Timer : MonoBehaviour
     {
 
-        float playTime = 0;//视唱已持续时间
+        float playTime = 0.5f;//视唱已持续时间,有偏差，增加初始值
         float endTime = 0;//视唱结束时间
         bool start = false;
 
