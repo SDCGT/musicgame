@@ -12,7 +12,7 @@ using UnityEngine;
 
         void Start()
         {
-            endTime = StaticMusicInfo.GetEndTime();
+            endTime = StaticMusicInfo.GetEndTime()+0.5f;//有偏差，增加初始值;
             Debug.Log("endTime"+endTime);
         }
 
@@ -25,13 +25,13 @@ using UnityEngine;
 
             }
 
-            if (start && playTime < endTime)//曲目时间内，计时器运作
+            if (start && playTime < (endTime+2))//曲目时间内，计时器运作
             {
                 playTime += Time.deltaTime;
                 //Debug.Log("playtime" + playTime);
             }
 
-            if (start && playTime >= endTime)
+            if (start && playTime >= (endTime+2))
             {
                 //SendMessage("EndGame");
             }

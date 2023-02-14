@@ -34,8 +34,8 @@ namespace xmlParser
             {
                 if(time.GetGameTime()<0.03f)
                 {
-                    Invoke("PlayMetronome", 0.03f);
-                    Debug.Log("playfirsttime");
+                   // Invoke("PlayMetronome", 0.03f);
+                    //Debug.Log("playfirsttime");
                 }
                 if(time.GetGameTime()*10%3<0.3f)
                 {
@@ -47,7 +47,7 @@ namespace xmlParser
         void BornStar()
         {
             GameObject star1 = Instantiate(star, new Vector3(center + offset * midiID, -16, 0), new Quaternion(0, 0, 0, 0), planet.transform);
-            Debug.Log("bornstar");
+            Debug.Log("bornstar"+midiID);
         }
     }
 }

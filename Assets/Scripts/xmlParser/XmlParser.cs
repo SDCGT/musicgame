@@ -33,6 +33,7 @@ namespace xmlParser
         private string _beamNum = ""; //  符杠序号
         private string _perminute = "";//节奏型
         private Symbol _symbol;
+        //private TimeLine _timeLine;
         private Beat _beat;
         private Head _highHead;
         private Head _lowHead;
@@ -44,6 +45,7 @@ namespace xmlParser
         private List<Symbol> _highSymbolList = new List<Symbol>(); // 高音乐符列表
         private List<Symbol> _lowSymbolList = new List<Symbol>(); // 低音乐符列表
 
+        //private List<TimeLine> _timeLineList = new List<TimeLine>();//所有音符休止符列表
         private List<Note> _highNoteMeasure = new List<Note>();//保存音高
         private List<Symbol> _highSymbolMeasure = new List<Symbol>(); // 一节中的高音乐符
         private List<Symbol> _lowSymbolMeasure = new List<Symbol>(); // 一节中的低音乐符
@@ -155,18 +157,20 @@ namespace xmlParser
                             //  音符，包括音符及休止符
                             _symbol.SetDuration(_divisions, _duration);
                             _symbol.SetType(_type);
+                            //_timeLine.SetDuration(_divisions, _duration);
+                            //_timeLine.SetType(_type);
 
                             bool isNote = _symbol is Note;
                             if (isNote)
                             {
-                                
                                 ((Note) _symbol).SetAccidental(_accidental);
                                 _accidental = "";
                                 if (_stem.Equals("up")) ((Note) _symbol).SetUpOrDown(true);
                                 else if (_stem.Equals("down")) ((Note) _symbol).SetUpOrDown(false);
+
                             }
 
-                            if (_staff.Equals("1"))
+                            if (_staff.Equals("1"))//绘制相关
                             {
                                 if (isNote)
                                 {

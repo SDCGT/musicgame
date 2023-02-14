@@ -17,8 +17,8 @@ namespace xmlParser
         void Start()
         {
             instance = MusicInfo.GetInstance();
-            //perminute = instance.GetPerminute();
-            perminute = 60;
+            perminute = instance.GetPerminute();
+            //perminute = 60;
             beat = instance.GetBeat();
             float prepeartime = (magnitudeofBPM *beat*1.0f)/ (perminute*1.0f/60.0f);
             //prepeartime = Mathf.InverseLerp(0, perminute, magnitudeofBPM * beat);

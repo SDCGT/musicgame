@@ -23,8 +23,8 @@ namespace xmlParser
         void Start()
         {
             instance = MusicInfo.GetInstance();
-            //perminute = instance.GetPerminute();
-            perminute =60;
+            perminute = instance.GetPerminute();
+            //perminute =60;
             Debug.Log("inter" + perminute);
             interval = 60 / perminute;
             

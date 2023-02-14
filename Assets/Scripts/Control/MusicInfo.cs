@@ -36,8 +36,8 @@ namespace xmlParser
         private void Awake()
         {
             XmlParser parser = new XmlParser(instance.ScoreName);
-            instance.NoteList = parser.GetNoteList();
-            string perminutestr = parser.GetPerMinute();
+            instance.NoteList = parser.GetNoteList();//获取音符序列
+            string perminutestr = parser.GetPerMinute();//获取BPM
             int.TryParse(perminutestr, out instance.perminute);
             //Debug.Log("NoteCount" + NoteList.Count);
             instance.measureCount = parser.GetMeasureList().Count;
@@ -111,26 +111,37 @@ namespace xmlParser
                 }
             }
         }
-        int GetMIDIID(float time)//按时间节点获取音高
+        public int GetMIDIID(float time)//按时间节点获取音高
         {
-            int MidiID = instance.midiID;
-            for (int i = 0; i < instance.SymbolMeasure.Count; i++)
+            //int MidiID = 0; = instance.midiID;
+            for (int i = 0; i < (instance.SymbolMeasure.Count-1); i++)
             {
-                if ((time - instance.SymbolMeasure[i].GetStartTime()) < 0.1f && (time - instance.SymbolMeasure[i].GetStartTime()) > 0)
+                bool isNote = instance.SymbolMeasure[i] is Note;
+                if(time<instance.endTime)
                 {
-                    if (i < instance.NoteList.Count)
+                    Debug.Log("time" + time + "endtime" + instance.endTime);
+                    if ((time - instance.SymbolMeasure[i].GetStartTime()) < 0.1f && (time - instance.SymbolMeasure[i].GetStartTime()) > 0)
                     {
-                        MidiID = GetDigitizedPitch(instance.NoteList[i].GetStep(), instance.NoteList[i].GetOctave());
-                        //Debug.Log("in GetDigitizedPitch:" + MidiID);
-                    }
-                    if (i >= instance.NoteList.Count)//此处代码有很大问题需要修改
-                    {
-                        instance.midiID = 0;//表示休止
-                        Debug.Log("等于0时" + instance.midiID);
+                        //if (i < instance.NoteList.Count)
+                        if (isNote)
+                        {
+                            instance.midiID = GetDigitizedPitch(instance.NoteList[i].GetStep(), instance.NoteList[i].GetOctave());
+                            //Debug.Log("in GetDigitizedPitch:" + MidiID);
+                        }
+                        if (!isNote)
+                        {
+                            instance.midiID = 0;//表示休止
+                            Debug.Log("等于0时" + instance.midiID);
+                        }
                     }
                 }
-            }
-            return MidiID;
+
+                else
+                {
+                    instance.midiID = -1;
+                }
+        }
+           return instance.midiID;
         }
 
         private int GetDigitizedPitch(string step, string octave)//换算MIDIID
