@@ -144,7 +144,7 @@ namespace xmlParser
                             _symbol = new Note(_step, _octave);
                             _symbol.SetChord(_isChord);
                             _isChord = false;
-                            _highNoteMeasure.Add(new Note(_step, _octave));
+                            //_highNoteMeasure.Add(new Note(_step, _octave));
                         }
 
                         if (xmlReader.Name.Equals("dot"))
@@ -159,15 +159,21 @@ namespace xmlParser
                             _symbol.SetType(_type);
                             //_timeLine.SetDuration(_divisions, _duration);
                             //_timeLine.SetType(_type);
+                            
 
                             bool isNote = _symbol is Note;
                             if (isNote)
                             {
+                                _highNoteMeasure.Add(new Note(_step, _octave));
                                 ((Note) _symbol).SetAccidental(_accidental);
                                 _accidental = "";
                                 if (_stem.Equals("up")) ((Note) _symbol).SetUpOrDown(true);
                                 else if (_stem.Equals("down")) ((Note) _symbol).SetUpOrDown(false);
+                            }
 
+                            else
+                            {
+                                //_highNoteMeasure.Add(new Note("0","0" ));
                             }
 
                             if (_staff.Equals("1"))//绘制相关
