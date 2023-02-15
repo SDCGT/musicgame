@@ -17,6 +17,8 @@ namespace FinerGames.PitchDetector.Demo
         float pitch = 0;
         public TMP_Text score;
         private List<double> singPitchList = new List<double>();
+        public Dictionary<float, double> SingDictionary = new Dictionary<float, double>();
+
         void Start()
         {
 

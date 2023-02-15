@@ -32,22 +32,18 @@ namespace xmlParser
             midiID = musicinfo1.GetMidiID();
             if(midiID!=-1)
             {
-                if(time.GetGameTime()<0.03f)
+                if(time.GetGameTime()<0.05f)
                 {
-                   // Invoke("PlayMetronome", 0.03f);
+                    InvokeRepeating("BornStar",0, 0.3f);
                     //Debug.Log("playfirsttime");
-                }
-                if(time.GetGameTime()*10%3<0.3f)
-                {
-                    BornStar();
-                }
+                }             
             }
         }
 
         void BornStar()
         {
             GameObject star1 = Instantiate(star, new Vector3(center + offset * midiID, -16, 0), new Quaternion(0, 0, 0, 0), planet.transform);
-            Debug.Log("bornstar"+midiID);
+            //Debug.Log("bornstar"+midiID);
         }
     }
 }

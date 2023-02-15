@@ -8,7 +8,7 @@ namespace xmlParser
 {
     public class XmlParser
     {
-        private static string[] PITCH_NAME = {"C", "D", "E", "F", "G", "A", "B"};
+        private static string[] PITCH_NAME = { "C", "D", "E", "F", "G", "A", "B" };
         private int _highTime = 0; //  乐谱演奏时间
         private int _lowTime = 0; //  乐谱演奏时间
         private bool _isChord = false; //  是否是和弦
@@ -33,7 +33,6 @@ namespace xmlParser
         private string _beamNum = ""; //  符杠序号
         private string _perminute = "";//节奏型
         private Symbol _symbol;
-        //private TimeLine _timeLine;
         private Beat _beat;
         private Head _highHead;
         private Head _lowHead;
@@ -45,8 +44,6 @@ namespace xmlParser
         private List<Symbol> _highSymbolList = new List<Symbol>(); // 高音乐符列表
         private List<Symbol> _lowSymbolList = new List<Symbol>(); // 低音乐符列表
 
-        //private List<TimeLine> _timeLineList = new List<TimeLine>();//所有音符休止符列表
-        private List<Note> _highNoteMeasure = new List<Note>();//保存音高
         private List<Symbol> _highSymbolMeasure = new List<Symbol>(); // 一节中的高音乐符
         private List<Symbol> _lowSymbolMeasure = new List<Symbol>(); // 一节中的低音乐符
         private List<List<List<Symbol>>> _measureSymbolList = new List<List<List<Symbol>>>(); // 小节乐符列表
@@ -70,9 +67,9 @@ namespace xmlParser
 
                 XmlReaderSettings readerSettings = new XmlReaderSettings();
                 readerSettings.ProhibitDtd = false;
-//                readerSettings.DtdProcessing = DtdProcessing.Ignore;
+                //                readerSettings.DtdProcessing = DtdProcessing.Ignore;
                 XmlReader xmlReader = XmlReader.Create(_filename, readerSettings);
-//                XmlReader xmlReader = XmlReader.Create(_filename);
+                //                XmlReader xmlReader = XmlReader.Create(_filename);
 
                 while (xmlReader.Read())
                 {
@@ -96,7 +93,7 @@ namespace xmlParser
                             case "accidental": _accidental = xmlReader.ReadString(); break;
                             case "staff": _staff = xmlReader.ReadString(); break;
                             case "stem": _stem = xmlReader.ReadString(); break;
-                            case "per-minute":_perminute = xmlReader.ReadString(); break;
+                            case "per-minute": _perminute = xmlReader.ReadString(); break;
                             case "beam":
                                 _beamNum = xmlReader.GetAttribute("number");
                                 if (_beamNum.Equals("1"))
@@ -144,7 +141,6 @@ namespace xmlParser
                             _symbol = new Note(_step, _octave);
                             _symbol.SetChord(_isChord);
                             _isChord = false;
-                            //_highNoteMeasure.Add(new Note(_step, _octave));
                         }
 
                         if (xmlReader.Name.Equals("dot"))
@@ -157,30 +153,21 @@ namespace xmlParser
                             //  音符，包括音符及休止符
                             _symbol.SetDuration(_divisions, _duration);
                             _symbol.SetType(_type);
-                            //_timeLine.SetDuration(_divisions, _duration);
-                            //_timeLine.SetType(_type);
-                            
 
                             bool isNote = _symbol is Note;
                             if (isNote)
                             {
-                                _highNoteMeasure.Add(new Note(_step, _octave));
-                                ((Note) _symbol).SetAccidental(_accidental);
+                                ((Note)_symbol).SetAccidental(_accidental);
                                 _accidental = "";
-                                if (_stem.Equals("up")) ((Note) _symbol).SetUpOrDown(true);
-                                else if (_stem.Equals("down")) ((Note) _symbol).SetUpOrDown(false);
+                                if (_stem.Equals("up")) ((Note)_symbol).SetUpOrDown(true);
+                                else if (_stem.Equals("down")) ((Note)_symbol).SetUpOrDown(false);
                             }
 
-                            else
-                            {
-                                //_highNoteMeasure.Add(new Note("0","0" ));
-                            }
-
-                            if (_staff.Equals("1"))//绘制相关
+                            if (_staff.Equals("1"))
                             {
                                 if (isNote)
                                 {
-                                    SetShift((Note) _symbol, _highStandardStep, _highStandardOctave);
+                                    SetShift((Note)_symbol, _highStandardStep, _highStandardOctave);
                                     SetBeam(_highSymbolList);
                                     SetBeam(_highSymbolMeasure);
                                 }
@@ -191,8 +178,8 @@ namespace xmlParser
                                 }
                                 else
                                 {
-                                    //_symbol.SetStartTime(_highTime);
-                                    //_symbol.SetStopTime((_highTime += _symbol.GetDuration()));
+                                    _symbol.SetStartTime(_highTime);
+                                    _symbol.SetStopTime((_highTime += _symbol.GetDuration()));
                                     _highSymbolList.Add(_symbol);
                                     _highSymbolMeasure.Add(_symbol);
                                 }
@@ -201,7 +188,7 @@ namespace xmlParser
                             {
                                 if (isNote)
                                 {
-                                    SetShift((Note) _symbol, _lowStandardStep, _lowStandardOctave);
+                                    SetShift((Note)_symbol, _lowStandardStep, _lowStandardOctave);
                                     SetBeam(_lowSymbolList);
                                     SetBeam(_lowSymbolMeasure);
                                 }
@@ -272,7 +259,7 @@ namespace xmlParser
 
         public Beat GetBeat() { return _beat; }
 
-        public Head GetHighHead()  { return _highHead; }
+        public Head GetHighHead() { return _highHead; }
 
         public Head GetLowHead() { return _lowHead; }
 
@@ -284,13 +271,14 @@ namespace xmlParser
 
         public List<Measure> GetMeasureList() { return _measureList; }
 
-        public List<Note> GetNoteList() { return _highNoteMeasure; }
+        //public List<Note> GetNoteList() { return _highNoteMeasure; }
 
         public int GetAllDuration() { return _highTime; }
 
         public string GetPerMinute() { return _perminute; }
-        
-        private int GetStandard() {
+
+        private int GetStandard()
+        {
             int standard = 0;
             switch (_sign)
             {
@@ -344,9 +332,9 @@ namespace xmlParser
 
         private void SetChord(List<Symbol> symbolList)
         {
-            Note lastNote = (Note) symbolList[symbolList.Count - 1];
+            Note lastNote = (Note)symbolList[symbolList.Count - 1];
             lastNote.SetHasChord(true);
-            lastNote.GetChordList().Add((Note) _symbol);
+            lastNote.GetChordList().Add((Note)_symbol);
         }
 
         private void SetBeam(List<Symbol> symbolList)
@@ -354,45 +342,45 @@ namespace xmlParser
             switch (_beam)
             {
                 case "begin":
-                {
-                    _slur = new Slur();
-                    _slur.GetList().Add((Note) _symbol);
-                    ((Note) _symbol).SetSlur(true);
-                    ((Note) _symbol).SetNext(true);
-                }
+                    {
+                        _slur = new Slur();
+                        _slur.GetList().Add((Note)_symbol);
+                        ((Note)_symbol).SetSlur(true);
+                        ((Note)_symbol).SetNext(true);
+                    }
                     break;
                 case "continue":
-                {
-                    _slur.GetList().Add((Note) _symbol);
-                    ((Note) _symbol).SetLastNote((Note) symbolList[symbolList.Count - 1]);
-                    ((Note) _symbol).SetSlur(true);
-//                    ((Note) _symbol).SetLast(true);
-                    ((Note) _symbol).SetNext(true);
-                }
+                    {
+                        _slur.GetList().Add((Note)_symbol);
+                        ((Note)_symbol).SetLastNote((Note)symbolList[symbolList.Count - 1]);
+                        ((Note)_symbol).SetSlur(true);
+                        //                    ((Note) _symbol).SetLast(true);
+                        ((Note)_symbol).SetNext(true);
+                    }
                     break;
                 case "end":
-                {
-                    Note lastNote = (Note) symbolList[symbolList.Count - 1];
-                    _slur.GetList().Add((Note) _symbol);
-                    ((Note) _symbol).SetLastNote(lastNote);
-                    ((Note) _symbol).SetSlur(true);
-                    ((Note) _symbol).SetLast(true);
-
-                    if (_slur != null)
                     {
-                        _slur.Operate();
+                        Note lastNote = (Note)symbolList[symbolList.Count - 1];
+                        _slur.GetList().Add((Note)_symbol);
+                        ((Note)_symbol).SetLastNote(lastNote);
+                        ((Note)_symbol).SetSlur(true);
+                        ((Note)_symbol).SetLast(true);
+
+                        if (_slur != null)
+                        {
+                            _slur.Operate();
+                        }
                     }
-                }
                     break;
                 default: break;
             }
 
-            ((Note) _symbol).SetBeam(_beam);
+            ((Note)_symbol).SetBeam(_beam);
             _beam = "";
         }
 
         // 将小节中按照音符时长分组，返回整个小节的总duration
-        public int ArrangeMeasure()
+        private int ArrangeMeasure()
         {
             int i = 0;
             int j = 0;
@@ -431,7 +419,6 @@ namespace xmlParser
                 _measureSymbolList.Add(setList);
             }
             return i >= j ? i : j;
-            
         }
     }
 }

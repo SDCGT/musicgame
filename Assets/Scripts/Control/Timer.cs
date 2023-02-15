@@ -6,14 +6,13 @@ using UnityEngine;
     public class Timer : MonoBehaviour
     {
 
-        float playTime = 0.5f;//视唱已持续时间,有偏差，增加初始值
+        float playTime = 0;//视唱已持续时间,有偏差，增加初始值
         float endTime = 0;//视唱结束时间
         bool start = false;
 
         void Start()
         {
-            endTime = StaticMusicInfo.GetEndTime()+0.5f;//有偏差，增加初始值;
-            Debug.Log("endTime"+endTime);
+            endTime = StaticMusicInfo.GetEndTime();
         }
 
         // Update is called once per frame
@@ -25,13 +24,13 @@ using UnityEngine;
 
             }
 
-            if (start && playTime < (endTime+2))//曲目时间内，计时器运作
+            if (start && playTime < (endTime))//曲目时间内，计时器运作
             {
                 playTime += Time.deltaTime;
                 //Debug.Log("playtime" + playTime);
             }
 
-            if (start && playTime >= (endTime+2))
+            if (start && playTime >= (endTime))
             {
                 //SendMessage("EndGame");
             }

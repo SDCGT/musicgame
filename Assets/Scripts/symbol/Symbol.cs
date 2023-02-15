@@ -6,7 +6,7 @@ namespace symbol
     {
         protected int Duration;     //  符号时长
         protected float StartTime;    //  符号起始时刻
-        protected int StopTime;     //  符号结束时刻
+        protected float StopTime;     //  符号结束时刻
         protected int Type;         //  符号类型，1代表全音符/休止符、2代表二分音符/休止符、以此类推
         protected int Dot;      //  附点
         protected int SymbolWidth;  //  符号视图宽度
@@ -21,9 +21,9 @@ namespace symbol
 
         public void SetStartTime(float startTime) { StartTime = startTime; }
 
-        public int GetStopTime() { return StopTime; }
+        public float GetStopTime() { return StopTime; }
 
-        public void SetStopTime(int stopTime) { StopTime = stopTime; }
+        public void SetStopTime(float stopTime) { StopTime = stopTime; }
 
         public new int GetType() { return Type; }
 

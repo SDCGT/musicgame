@@ -25,14 +25,13 @@ namespace xmlParser
             instance = MusicInfo.GetInstance();
             perminute = instance.GetPerminute();
             //perminute =60;
-            Debug.Log("inter" + perminute);
-            interval = 60 / perminute;
-            
+            interval = 60.0f /(perminute*(1.0f));
+            Debug.Log("interval" + interval);
         }
 
         private void Update()
         {
-            if(timer1.GetGameTime()>0.8f&&!playbeat)
+            if(timer1.GetGameTime()>0&&!playbeat)
             {
                 InvokeRepeating("PlayMetronome", 0, interval);
                 playbeat = true;
@@ -42,7 +41,7 @@ namespace xmlParser
         // Update is called once per frame
         void PlayMetronome()
         {
-            //Debug.Log("play");
+            Debug.Log("playBeat");
             metronomeSound.Play();
         }
 

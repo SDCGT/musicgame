@@ -18,6 +18,7 @@ namespace xmlParser
         private List<Symbol> SymbolMeasure = new List<Symbol>();
         private List<Note> NoteList = new List<Note>();
         private List<double> ScorePitchList = new List<double>();
+        public Dictionary<float, double> ScoreDictionary = new Dictionary<float, double>();
 
         private Beat beat;
         float endTime;
@@ -28,6 +29,8 @@ namespace xmlParser
         int allBeats;
         int measureCount;
         public Timer time;
+        public float magnitudeofBPM = 2.0f;//预备播放几个小节的节拍
+        float prepeartime;//预备节拍时间
 
         public static MusicInfo GetInstance() { return instance; }
 
@@ -36,10 +39,8 @@ namespace xmlParser
         private void Awake()
         {
             XmlParser parser = new XmlParser(instance.ScoreName);
-            instance.NoteList = parser.GetNoteList();//获取音符序列
             string perminutestr = parser.GetPerMinute();//获取BPM
             int.TryParse(perminutestr, out instance.perminute);
-            //Debug.Log("NoteCount" + NoteList.Count);
             instance.measureCount = parser.GetMeasureList().Count;
             instance.SymbolMeasure = parser.GetHighSymbolList();
             instance.beat = parser.GetBeat();
@@ -48,14 +49,12 @@ namespace xmlParser
 
             int.TryParse(instance.beat.GetBeats(), out instance.beatint);
             int.TryParse(instance.beat.GetBeatType(), out instance.beattypeint);
-            //Debug.Log(SymbolMeasure.Count);
-            //Debug.Log(measureCount);
-            //Debug.Log(perminute);
             instance.allBeats = instance.beattypeint * instance.measureCount;
-            //Debug.Log(allBeats);
-            //Debug.Log(perminute);
             TotalTime();
             SetStartTime();
+            SetStopTime();
+            instance.prepeartime = (instance.magnitudeofBPM * instance.beatint * 1.0f) / (instance.perminute * 1.0f / 60.0f);
+            Debug.Log("prepeartime" + instance.prepeartime);
         }
         void Start()
         {
@@ -75,12 +74,12 @@ namespace xmlParser
             {
                 instance.midiID = GetMIDIID(time.GetGameTime());
                 Debug.Log("MIDIID" + instance.midiID);
-
+                ScoreDictionary.Add(time.GetGameTime()+prepeartime, frequent);//后台记录曲谱的音高
             }
 
             if (time.GetGameTime() >= instance.endTime)
             {
-                instance.midiID = 0;
+                instance.midiID = -1;
             }
         }
 
@@ -93,9 +92,31 @@ namespace xmlParser
             }
         }
 
-        void SetStartTime()//设置每个Symbol的起始时间
+        void SetStartTime()//设置每个Symbol的开始时间
         {
             float starttime = 0;
+            instance.SymbolMeasure[0].SetStartTime(starttime);
+            for (int i = 1; i < instance.SymbolMeasure.Count; i++)
+            {
+                if (instance.allduration != 0)
+                {
+                    int duration = instance.SymbolMeasure[i-1].GetDuration();
+                    //Debug.Log(perminute);
+                    float durationPercent = duration * 1.0f / (1.0f * instance.allduration);
+                    float BeatsPercent = instance.allBeats * 1.0f / (1.0f * instance.perminute);
+                    float durationTime = durationPercent * BeatsPercent * 60;
+                    starttime = starttime + durationTime;
+                    instance.SymbolMeasure[i].SetStartTime(starttime);
+                    //Debug.Log("i" + i + "duration" + duration);
+                    //Debug.Log("i" + i + "starttime" + starttime);
+                    //Debug.Log(SymbolMeasure[i].GetStartTime());
+                }
+            }
+        }
+
+        void SetStopTime()//设置每个Symbol的结束时间
+        {
+            float stoptime = 0;
             for (int i = 0; i < instance.SymbolMeasure.Count; i++)
             {
                 if (instance.allduration != 0)
@@ -105,43 +126,44 @@ namespace xmlParser
                     float durationPercent = duration * 1.0f / (1.0f * instance.allduration);
                     float BeatsPercent = instance.allBeats * 1.0f / (1.0f * instance.perminute);
                     float durationTime = durationPercent * BeatsPercent * 60;
-                    starttime = starttime + durationTime;
-                    instance.SymbolMeasure[i].SetStartTime(starttime);
+                    stoptime = stoptime + durationTime;
+                    instance.SymbolMeasure[i].SetStopTime(stoptime);
+                    //Debug.Log("i" + i + "duration" + duration);
+                    //Debug.Log("i" + i + "steptime" + stoptime);
                     //Debug.Log(SymbolMeasure[i].GetStartTime());
                 }
             }
         }
+
         public int GetMIDIID(float time)//按时间节点获取音高
         {
-            //int MidiID = 0; = instance.midiID;
-            for (int i = 0; i < (instance.SymbolMeasure.Count-1); i++)
-            {
-                bool isNote = instance.SymbolMeasure[i] is Note;
-                
-                if(time<instance.endTime)
-                {
-                    //Debug.Log("time" + time + "endtime" + instance.endTime);
-                    if ((time - instance.SymbolMeasure[i].GetStartTime()) < 0.1f && (time - instance.SymbolMeasure[i].GetStartTime()) > 0)
-                    {
-                        //if (i < instance.NoteList.Count)
-                        if (isNote)
-                        {
-                            instance.midiID = GetDigitizedPitch(((Note)instance.SymbolMeasure[i]).GetStep(), ((Note)instance.SymbolMeasure[i]).GetOctave());
-                            //Debug.Log("in GetDigitizedPitch:" + MidiID);
-                        }
-                        else 
-                        {
-                            instance.midiID = 0;//表示休止
-                            Debug.Log("等于0时" + instance.midiID);
-                        }
-                    }
-                }
+                  for (int i = 0; i < (instance.SymbolMeasure.Count); i++)
+                  {
+                      bool isNote = instance.SymbolMeasure[i] is Note;
+                      if (time < instance.endTime)
+                      {
 
-                else
-                {
-                    instance.midiID = -1;
-                }
-        }
+                          if (time > instance.SymbolMeasure[i].GetStartTime() && time < instance.SymbolMeasure[i].GetStopTime())
+                          {
+                              if (isNote)
+                              {
+                                  instance.midiID = GetDigitizedPitch(((Note)instance.SymbolMeasure[i]).GetStep(), ((Note)instance.SymbolMeasure[i]).GetOctave());
+                                  //Debug.Log("in GetDigitizedPitch:" + MidiID);
+                              }
+                              else
+                              {
+                                  instance.midiID = 0;//表示休止
+                              }
+                          }
+                      }
+
+                      else
+                      {
+                          instance.midiID = -1;
+                      }
+                  }
+            //int MidiID = 0; = instance.midiID;
+           
            return instance.midiID;
         }
 
@@ -188,6 +210,11 @@ namespace xmlParser
         public int GetBeat()
         {
             return instance.beatint;
+        }
+
+        public float GetPrepearTime()
+        {
+            return instance.prepeartime;
         }
     }
 }
