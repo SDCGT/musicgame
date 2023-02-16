@@ -16,8 +16,7 @@ namespace FinerGames.PitchDetector.Demo
         public SpriteRenderer playerMesh;
         float pitch = 0;
         public TMP_Text score;
-        private List<double> singPitchList = new List<double>();
-        public Dictionary<float, double> SingDictionary = new Dictionary<float, double>();
+        public Timer time;
 
         void Start()
         {
@@ -28,9 +27,6 @@ namespace FinerGames.PitchDetector.Demo
         void FixedUpdate()
         {
             pitch = detector.MidiNote;
-            //Debug.Log("singFrequent" + pitch);
-            //Debug.Log("singName" + detector.MidiNote);
-            singPitchList.Add(detector.Pitch);
             player.transform.position = new Vector3(0, pitch*0.31f-15f, 0);
             if(pitch<40)//可视性调整
             {
@@ -40,7 +36,11 @@ namespace FinerGames.PitchDetector.Demo
             {
                 playerMesh.color = new Color(255, 255, 255);
             }
-            PitchRecord.SetSingPitchList(singPitchList);
+            if(time.GetGameTime()> StaticMusicInfo.GetPrepearTime() && time.GetGameTime()<(StaticMusicInfo.GetEndTime()+StaticMusicInfo.GetPrepearTime()))
+            {
+                Debug.Log("startRecord");
+                PitchRecord.SetSingDictionary(time.GetGameTime(), detector.Pitch);//记录唱歌的音高
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

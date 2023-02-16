@@ -20,6 +20,7 @@ namespace xmlParser
         public float interval=0.3f;
         int midiID=-1;
         public Timer time;
+        bool creating = false;
 
         void Start()
         {
@@ -32,9 +33,10 @@ namespace xmlParser
             midiID = musicinfo1.GetMidiID();
             if(midiID!=-1)
             {
-                if(time.GetGameTime()<0.05f)
+                if(time.GetStartBool()&&!creating)
                 {
                     InvokeRepeating("BornStar",0, 0.3f);
+                    creating = true;
                     //Debug.Log("playfirsttime");
                 }             
             }

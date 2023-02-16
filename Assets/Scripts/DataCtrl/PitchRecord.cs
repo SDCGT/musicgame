@@ -7,26 +7,28 @@ using System.Text;
 
 public static class PitchRecord
 {
-    private static List<double> _singPitchList = new List<double>();
-    private static List<double> _scorePitchList = new List<double>();
+    public static Dictionary<float, double> _scoreDictionary = new Dictionary<float, double>();
+    public static Dictionary<float, double> _singDictionary = new Dictionary<float, double>();
 
-    public static List<double> GetSingPitchList()
+
+    public static Dictionary<float, double> GetSingDictionary()
     {
-        return _singPitchList; 
+        return _singDictionary;
     }
 
-    public static void SetSingPitchList(List<double> singPitchList)
+    public static void SetSingDictionary(float time, double frequent)
     {
-        _singPitchList = singPitchList;
+        _singDictionary.Add(time, frequent);
     }
 
-    public static List<double> GetScorePitchList()
+    public static Dictionary<float, double> GetScoreDictionary()
     {
-        return _singPitchList;
+        return _scoreDictionary;
     }
 
-    public static void SetScorePitchList(List<double> singPitchList)
+    public static void SetScoreDictionary(float time,double frequent)
     {
-        _singPitchList = singPitchList;
+        _scoreDictionary.Add(time, frequent);
     }
+
 }

@@ -17,7 +17,6 @@ namespace xmlParser
         XmlParser parser;
         private List<Symbol> SymbolMeasure = new List<Symbol>();
         private List<Note> NoteList = new List<Note>();
-        private List<double> ScorePitchList = new List<double>();
         public Dictionary<float, double> ScoreDictionary = new Dictionary<float, double>();
 
         private Beat beat;
@@ -53,8 +52,8 @@ namespace xmlParser
             TotalTime();
             SetStartTime();
             SetStopTime();
-            instance.prepeartime = (instance.magnitudeofBPM * instance.beatint * 1.0f) / (instance.perminute * 1.0f / 60.0f);
-            Debug.Log("prepeartime" + instance.prepeartime);
+            instance.prepeartime = (instance.magnitudeofBPM * instance.beatint * 1.0f) / (instance.perminute * 1.0f / 60.0f) + 0.15f;//0.3f为位置偏移补偿;
+            StaticMusicInfo.SetPrepearTime(instance.prepeartime);
         }
         void Start()
         {
@@ -65,21 +64,19 @@ namespace xmlParser
         void FixedUpdate()
         {
             instance.frequent = 440 * Mathf.Pow(2, (instance.midiID - 69) / 12);
-            //Debug.Log(midiID + "scoreFrequent" + frequent);
-            instance.ScorePitchList.Add(frequent);
-            PitchRecord.SetScorePitchList(instance.ScorePitchList);
-
-            //Debug.Log(time.GetGameTime());
             if (0<time.GetGameTime() && time.GetGameTime()< instance.endTime)//曲目时间内，获取曲目当前音高
             {
                 instance.midiID = GetMIDIID(time.GetGameTime());
-                Debug.Log("MIDIID" + instance.midiID);
-                ScoreDictionary.Add(time.GetGameTime()+prepeartime, frequent);//后台记录曲谱的音高
+                PitchRecord.SetScoreDictionary(time.GetGameTime()+instance.prepeartime, instance.frequent);//后台记录曲谱的音高
             }
 
             if (time.GetGameTime() >= instance.endTime)
             {
                 instance.midiID = -1;
+            }
+            
+            if(time.GetGameTime()>=(instance.endTime+instance.prepeartime))
+            {
             }
         }
 
@@ -107,9 +104,6 @@ namespace xmlParser
                     float durationTime = durationPercent * BeatsPercent * 60;
                     starttime = starttime + durationTime;
                     instance.SymbolMeasure[i].SetStartTime(starttime);
-                    //Debug.Log("i" + i + "duration" + duration);
-                    //Debug.Log("i" + i + "starttime" + starttime);
-                    //Debug.Log(SymbolMeasure[i].GetStartTime());
                 }
             }
         }

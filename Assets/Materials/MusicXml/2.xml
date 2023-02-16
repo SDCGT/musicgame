@@ -89,7 +89,7 @@
         <direction-type>
           <metronome parentheses="no" default-x="-41.18" relative-y="20.00">
             <beat-unit>quarter</beat-unit>
-            <per-minute>90</per-minute>
+            <per-minute>60</per-minute>
             </metronome>
           </direction-type>
         <staff>1</staff>
