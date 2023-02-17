@@ -39,7 +39,11 @@ namespace FinerGames.PitchDetector.Demo
             if(time.GetGameTime()> StaticMusicInfo.GetPrepearTime() && time.GetGameTime()<(StaticMusicInfo.GetEndTime()+StaticMusicInfo.GetPrepearTime()))
             {
                 Debug.Log("startRecord");
-                PitchRecord.SetSingDictionary(time.GetGameTime(), detector.Pitch);//记录唱歌的音高
+                //PitchRecord.SetSingDictionary(time.GetGameTime(), detector.Pitch);
+                RecordData data1=new RecordData();
+                data1.time = time.GetGameTime();
+                data1.Frequent = detector.Pitch;
+                PitchRecord.SetSingList(data1);//记录唱歌的音高
             }
         }
 

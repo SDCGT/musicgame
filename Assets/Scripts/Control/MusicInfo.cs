@@ -63,11 +63,16 @@ namespace xmlParser
         // Update is called once per frame
         void FixedUpdate()
         {
-            instance.frequent = 440 * Mathf.Pow(2, (instance.midiID - 69) / 12);
+            instance.frequent = 440.0f * Mathf.Pow(2.0f, (instance.midiID*1.0f - 69.0f) / 12.0f);
+            Debug.Log(instance.frequent);
             if (0<time.GetGameTime() && time.GetGameTime()< instance.endTime)//曲目时间内，获取曲目当前音高
             {
                 instance.midiID = GetMIDIID(time.GetGameTime());
-                PitchRecord.SetScoreDictionary(time.GetGameTime()+instance.prepeartime, instance.frequent);//后台记录曲谱的音高
+                //PitchRecord.SetScoreDictionary(time.GetGameTime()+instance.prepeartime, instance.frequent);
+                RecordData data = new RecordData();
+                data.time = time.GetGameTime() + instance.prepeartime;
+                data.Frequent = instance.frequent;
+                PitchRecord.SetScoreList(data);//后台记录曲谱的音高
             }
 
             if (time.GetGameTime() >= instance.endTime)
@@ -161,21 +166,22 @@ namespace xmlParser
            return instance.midiID;
         }
 
-        private int GetDigitizedPitch(string step, string octave)//换算MIDIID
+        private int GetDigitizedPitch(string step, string octave)//换算高度
         {
             int digitizedPitch = 1;
 
             switch (step)
             {
-                case "C": digitizedPitch = 1; break;
+                case "C": digitizedPitch = 0; break;
                 case "D": digitizedPitch = 2; break;
-                case "E": digitizedPitch = 3; break;
-                case "F": digitizedPitch = 4; break;
-                case "G": digitizedPitch = 5; break;
-                case "A": digitizedPitch = 6; break;
-                case "B": digitizedPitch = 7; break;
+                case "E": digitizedPitch = 4; break;
+                case "F": digitizedPitch = 5; break;
+                case "G": digitizedPitch = 7; break;
+                case "A": digitizedPitch = 9; break;
+                case "B": digitizedPitch = 11; break;
             }
-            return digitizedPitch + (int.Parse(octave) - 1) * 7;
+            //return digitizedPitch + (int.Parse(octave) - 1) * 7;
+            return digitizedPitch + (int.Parse(octave) + 1) * 12;
         }
 
         void TotalTime()//计算曲目总时长

@@ -1269,7 +1269,7 @@ MonoBehaviour:
   planet: {fileID: 1540165817}
   musicinfo1: {fileID: 131948316}
   center: 6
-  offset: 0.6
+  offset: 0.3
   interval: 0
   time: {fileID: 251573236}
 --- !u!1 &997995885
