@@ -26,7 +26,7 @@ namespace FinerGames.PitchDetector.Demo
         // Update is called once per frame
         void FixedUpdate()
         {
-            Debug.Log(pitch);
+            //Debug.Log(pitch);
             pitch = detector.Pitch;
             pitch = pitch * Mathf.Pow(2.0f, (1.38f / 12.0f));//后台记录的音高
             player.transform.position = new Vector3(0, (detector.MidiNote+detector.MidiCents*0.01f)*0.31f-18f, 0);
@@ -40,7 +40,7 @@ namespace FinerGames.PitchDetector.Demo
             }
             if(time.GetGameTime()> StaticMusicInfo.GetPrepearTime() && time.GetGameTime()<(StaticMusicInfo.GetEndTime()+StaticMusicInfo.GetPrepearTime()))
             {
-                Debug.Log("startRecord");
+                //Debug.Log("startRecord");
                 //PitchRecord.SetSingDictionary(time.GetGameTime(), detector.Pitch);
                 RecordData data1=new RecordData();
                 data1.time = time.GetGameTime();
@@ -53,7 +53,7 @@ namespace FinerGames.PitchDetector.Demo
         {
             if (collision.tag == "star")
             {
-                Debug.Log("addScore");
+                //Debug.Log("addScore");
                 string scorestr;
                 int scoreint;
                 scorestr = score.text.ToString();

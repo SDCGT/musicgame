@@ -52,7 +52,7 @@ namespace xmlParser
             TotalTime();
             SetStartTime();
             SetStopTime();
-            instance.prepeartime = (instance.magnitudeofBPM * instance.beatint * 1.0f) / (instance.perminute * 1.0f / 60.0f) + 0.15f;//0.3fÎªÎ»ÖÃÆ«ÒÆ²¹³¥;
+            instance.prepeartime = (instance.magnitudeofBPM * instance.beatint * 1.0f) / (instance.perminute * 1.0f / 60.0f) + 0.15f;//0.15fÎªÎ»ÖÃÆ«ÒÆ²¹³¥;
             StaticMusicInfo.SetPrepearTime(instance.prepeartime);
         }
         void Start()
