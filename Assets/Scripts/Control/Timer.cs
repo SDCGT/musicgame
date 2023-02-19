@@ -33,8 +33,9 @@ using UnityEngine;
             {
                 upLoadData1.SendMessage("UpLoad");
                 end = true;
-        }
-        }
+            }
+
+    }
         public float GetGameTime()
         {
             return playTime;
@@ -44,4 +45,6 @@ using UnityEngine;
         {
             return start;
         }
+
+
     }

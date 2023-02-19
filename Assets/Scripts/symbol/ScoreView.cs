@@ -15,6 +15,10 @@ namespace symbol
         private ParamsGetter _paramsGetter = ParamsGetter.GetInstance();
         private CommonParams _commonParams = CommonParams.GetInstance();
 
+        GameObject MainMenuBtn;
+        GameObject RestartBtn;
+        GameObject ExitBtn;
+
         public ScoreView(List<List<Measure>> scoreList, GameObject parentObject, List<float> screenSize, List<string> scoreInfo)
         {
             _parentObject = parentObject;
@@ -31,7 +35,7 @@ namespace symbol
 
         private void OnDraw()
         {
-            // 放置两个按钮
+            // 放置按钮
             PlaceButton();
             // 绘制乐谱信息
             DrawScoreInfo();
@@ -85,7 +89,7 @@ namespace symbol
             objectText.text = text;
         }
 
-        // 放置两个button按钮作为返回上一个场景，以及退出
+        // 放置button按钮暂停游戏
         private void PlaceButton()
         {
             // 返回按钮
@@ -94,16 +98,32 @@ namespace symbol
             backButtonObject.transform.SetParent(_parentObject.transform);
             RectTransform backRect = backButtonObject.GetComponent<RectTransform>();
             backRect.position = new Vector3(50, _screenSize[1] - 50, 0);
-            backRect.sizeDelta = new Vector2(50, 30);
+            backRect.sizeDelta = new Vector2(65, 65);
             Text backText = backButtonObject.GetComponentInChildren<Text>();
-            backText.text = "Back";
+            backText.text = "";
             Button backButton = backButtonObject.GetComponent<Button>();
             backButton.onClick.AddListener(delegate
             {
-                SceneManager.LoadScene("StartScene");
+                //SceneManager.LoadScene("StartScene");
+                //if(Time.timeScale==1)
+                //{
+                    Debug.Log("暂停");
+                    Time.timeScale = 0;
+                    InitiatePauseMenu();
+                //}
+
+                //SceneManager.LoadScene("StartScene");
+               /*if (Time.timeScale == 0)
+                {
+                    Time.timeScale = 1;
+                    Destroy(MainMenuBtn);
+                    Destroy(RestartBtn);
+                    Destroy(ExitBtn);
+                }*/
+
             });
 
-            // 重启按钮
+            /*
             GameObject exitButtonObject = GameObject.Instantiate(_commonParams.GetPrefabFileButton(),
                 _parentObject.transform.position, _commonParams.GetPrefabFileButton().transform.rotation);
             exitButtonObject.transform.SetParent(_parentObject.transform);
@@ -117,6 +137,50 @@ namespace symbol
             {
                 SystemCtrl.ResumeGame();
                 //Application.Quit();
+            });*/
+        }
+
+        private void InitiatePauseMenu()
+        {
+            MainMenuBtn= GameObject.Instantiate(_commonParams.GetMainMenuButton(),
+                _parentObject.transform.position, _commonParams.GetMainMenuButton().transform.rotation);
+            MainMenuBtn.transform.SetParent(_parentObject.transform);
+            RectTransform mainRect = MainMenuBtn.GetComponent<RectTransform>();
+            mainRect.position = new Vector3(_screenSize[0]/2+300, _screenSize[1] - 540, 0);
+            mainRect.sizeDelta = new Vector2(470, 414);
+            
+            Button mainButton = MainMenuBtn.GetComponent<Button>();
+            mainButton.onClick.AddListener(delegate
+            {
+                Time.timeScale = 1;
+                SceneManager.LoadScene("StartScene");//回到开始菜单
+            });
+
+            RestartBtn = GameObject.Instantiate(_commonParams.GetRestartButton(),
+               _parentObject.transform.position, _commonParams.GetRestartButton().transform.rotation);
+            RestartBtn.transform.SetParent(_parentObject.transform);
+            RectTransform restartRect = RestartBtn.GetComponent<RectTransform>();
+            restartRect.position = new Vector3(_screenSize[0] / 2-300, _screenSize[1] - 600, 0);
+            restartRect.sizeDelta = new Vector2(529, 422);
+            Button restartButton = RestartBtn.GetComponent<Button>();
+            restartButton.onClick.AddListener(delegate
+            {             
+                SceneManager.LoadScene("LevelScene");//重新开始
+                Time.timeScale = 1;
+            });
+
+            ExitBtn = GameObject.Instantiate(_commonParams.GetExitButton(),
+              _parentObject.transform.position, _commonParams.GetExitButton().transform.rotation);
+            ExitBtn.transform.SetParent(_parentObject.transform);
+            RectTransform exitRect = ExitBtn.GetComponent<RectTransform>();
+            exitRect.position = new Vector3(_screenSize[0] / 2-50, _screenSize[1] - 300, 0);
+            exitRect.sizeDelta = new Vector2(353, 313);
+            Button exitButton = ExitBtn.GetComponent<Button>();
+            exitButton.onClick.AddListener(delegate
+            {
+                Debug.Log("GameEnd");//结束游戏
+                Time.timeScale = 1;
+                Application.Quit();
             });
         }
     }

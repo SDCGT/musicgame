@@ -13,6 +13,9 @@ namespace util
         private GameObject _prefabText;
         private GameObject _prefabLine;
         private GameObject _prefabFileButton;
+        private GameObject _ExitBtn;
+        private GameObject _RestartBtn;
+        private GameObject _MainMenuBtn;
 
         public static CommonParams GetInstance() { return instance; }
 
@@ -46,5 +49,17 @@ namespace util
         public GameObject GetPrefabFileButton() { return _prefabFileButton; }
 
         public void SetPrefabFileButton(GameObject prefabFileButton) { _prefabFileButton = prefabFileButton; }
+
+        public GameObject GetExitButton() { return _ExitBtn; }
+
+        public void SetExitButton(GameObject exitBtn) { _ExitBtn = exitBtn; }
+
+        public GameObject GetMainMenuButton() { return _MainMenuBtn; }
+
+        public void SetMainMenuButton(GameObject mainBtn) { _MainMenuBtn = mainBtn; }
+
+        public GameObject GetRestartButton() { return _RestartBtn; }
+
+        public void SetRestartButton(GameObject restartBtn) { _RestartBtn = restartBtn; }
     }
 }

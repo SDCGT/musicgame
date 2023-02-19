@@ -13,6 +13,9 @@ namespace control
         private GameObject _prefabText;
         private GameObject _prefabLine;
         private GameObject _prefabFileButton;
+        private GameObject _MainMenuBtn;
+        private GameObject _RestartBtn;
+        private GameObject _ExitBtn;
 
         private void Awake()
         {
@@ -21,11 +24,19 @@ namespace control
             _prefabText = (GameObject)Resources.Load("Prefabs/Prefab_Text");
             _prefabLine = (GameObject)Resources.Load("Prefabs/Prefab_Line");
             _prefabFileButton = (GameObject)Resources.Load("Prefabs/Prefab_FileButton");
+            _MainMenuBtn = (GameObject)Resources.Load("Prefabs/Main");
+            _RestartBtn = (GameObject)Resources.Load("Prefabs/Restart");
+            _ExitBtn= (GameObject)Resources.Load("Prefabs/Exit");
+
             // 设置到单例模式中对应的参数
             _commonParams.SetPrefabSymbol(_prefabSymbol);
             _commonParams.SetPrefabText(_prefabText);
             _commonParams.SetPrefabLine(_prefabLine);
             _commonParams.SetPrefabFileButton(_prefabFileButton);
+            _commonParams.SetExitButton(_ExitBtn);
+            _commonParams.SetMainMenuButton(_MainMenuBtn);
+            _commonParams.SetRestartButton(_RestartBtn);
+
         }
 
         // Use this for initialization
@@ -36,6 +47,9 @@ namespace control
             _commonParams.SetPrefabText(_prefabText);
             _commonParams.SetPrefabLine(_prefabLine);
             _commonParams.SetPrefabFileButton(_prefabFileButton);
+            _commonParams.SetExitButton(_ExitBtn);
+            _commonParams.SetMainMenuButton(_MainMenuBtn);
+            _commonParams.SetRestartButton(_RestartBtn);
             LoadScore();
         }
 
