@@ -17,6 +17,9 @@ using UnityEngine;
             start = false;
             bool end = false;
             endTime = StaticMusicInfo.GetEndTime();
+            PitchRecord.ClearData();
+            Debug.Log(PitchRecord.GetScoreList().Count);
+            
         }
 
         // Update is called once per frame

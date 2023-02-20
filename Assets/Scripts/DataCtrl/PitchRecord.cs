@@ -23,6 +23,12 @@ public static class PitchRecord
         return _singDictionary;
     }*/
 
+    public static void ClearData()
+    {
+        _scoreList.Clear();
+        _singList.Clear();
+    }
+
     public static List<RecordData> GetSingList()
     {
         return _singList;

@@ -27,7 +27,7 @@ namespace symbol
 
         protected override void OnDraw()
         {
-            Debug.Log(_note.GetDot());
+            //Debug.Log(_note.GetDot());
             // 绘制定位线
             if (Cursor)
             {
