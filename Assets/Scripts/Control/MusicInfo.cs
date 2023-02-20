@@ -11,7 +11,7 @@ namespace xmlParser
     {
         private static MusicInfo instance = new MusicInfo();
 
-        int midiID = -1;
+        int midiID;
         double frequent = 0;
         string ScoreName = CommonParams.GetInstance().GetScoreName();
         XmlParser parser;
@@ -37,6 +37,8 @@ namespace xmlParser
 
         private void Awake()
         {
+            instance.allduration = 0;
+            instance.midiID = -1;
             XmlParser parser = new XmlParser(instance.ScoreName);
             string perminutestr = parser.GetPerMinute();//获取BPM
             int.TryParse(perminutestr, out instance.perminute);
@@ -71,7 +73,7 @@ namespace xmlParser
                 //PitchRecord.SetScoreDictionary(time.GetGameTime()+instance.prepeartime, instance.frequent);
                 RecordData data = new RecordData();
                 data.time = time.GetGameTime() + instance.prepeartime;
-                data.Frequent = instance.frequent;
+                data.Frequent = instance.midiID;
                 PitchRecord.SetScoreList(data);//后台记录曲谱的音高
             }
 
@@ -92,6 +94,7 @@ namespace xmlParser
             {
                 instance.allduration = instance.allduration + instance.SymbolMeasure[i].GetDuration();
             }
+            //Debug.Log(instance.SymbolMeasure.Count);
         }
 
         void SetStartTime()//设置每个Symbol的开始时间
@@ -109,6 +112,7 @@ namespace xmlParser
                     float durationTime = durationPercent * BeatsPercent * 60;
                     starttime = starttime + durationTime;
                     instance.SymbolMeasure[i].SetStartTime(starttime);
+                    //Debug.Log("durationPercent" + instance.allduration);
                 }
             }
         }
@@ -147,7 +151,7 @@ namespace xmlParser
                               if (isNote)
                               {
                                   instance.midiID = GetDigitizedPitch(((Note)instance.SymbolMeasure[i]).GetStep(), ((Note)instance.SymbolMeasure[i]).GetOctave());
-                                  //Debug.Log("in GetDigitizedPitch:" + MidiID);
+                                  //Debug.Log("in GetDigitizedPitch:" + instance.midiID);
                               }
                               else
                               {
@@ -189,7 +193,7 @@ namespace xmlParser
             float BeatsPercent = instance.allBeats * 1.0f / (1.0f * instance.perminute);
             instance.endTime = BeatsPercent * 60.0f;
             StaticMusicInfo.SetEndTime(instance.endTime);
-            //Debug.Log("BeatsPercent" + instance.perminute);
+            Debug.Log("endTime" + instance.endTime);
         }
 
         public float GetEndTime()

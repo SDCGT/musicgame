@@ -107,7 +107,7 @@ namespace symbol
                 //SceneManager.LoadScene("StartScene");
                 //if(Time.timeScale==1)
                 //{
-                    Debug.Log("暂停");
+                    //Debug.Log("暂停");
                     Time.timeScale = 0;
                     InitiatePauseMenu();
                 //}

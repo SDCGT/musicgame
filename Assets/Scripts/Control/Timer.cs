@@ -6,18 +6,23 @@ using UnityEngine;
     public class Timer : MonoBehaviour
     {
         public GameObject upLoadData1;
-        float playTime = 0;//视唱已持续时间,有偏差，增加初始值
-        float endTime = 0;//视唱结束时间
-        bool start = false;
-        bool end = false;
+        float playTime;//视唱已持续时间,有偏差，增加初始值
+        float endTime;//视唱结束时间
+        bool start;
+        bool end;
         void Start()
         {
+            playTime = 0;
+            endTime = 0;
+            start = false;
+            bool end = false;
             endTime = StaticMusicInfo.GetEndTime();
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
+            //Debug.Log("playtime"+playTime);
             if (Input.GetKeyDown(KeyCode.Space))  //按下空格键后开始
             {
                 start = true;

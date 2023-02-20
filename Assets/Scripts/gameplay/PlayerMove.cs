@@ -29,7 +29,7 @@ namespace FinerGames.PitchDetector.Demo
             //Debug.Log(pitch);
             pitch = detector.Pitch;
             pitch = pitch * Mathf.Pow(2.0f, (1.38f / 12.0f));//后台记录的音高
-            player.transform.position = new Vector3(0, (detector.MidiNote+detector.MidiCents*0.01f)*0.31f-18f, 0);
+            player.transform.position = new Vector3(0, (detector.MidiNote+detector.MidiCents*0.01f)*0.31f-19f, 0);
             if(pitch<40)//可视性调整
             {
                 playerMesh.color = new Color(0, 0, 0, 0);
@@ -44,7 +44,7 @@ namespace FinerGames.PitchDetector.Demo
                 //PitchRecord.SetSingDictionary(time.GetGameTime(), detector.Pitch);
                 RecordData data1=new RecordData();
                 data1.time = time.GetGameTime();
-                data1.Frequent = pitch;
+                data1.Frequent = detector.MidiNote + detector.MidiCents * 0.01f+1.38f;
                 PitchRecord.SetSingList(data1);//记录唱歌的音高
             }
         }
