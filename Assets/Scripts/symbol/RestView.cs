@@ -32,6 +32,7 @@ namespace symbol
             // 如果是点，绘制
             if (_rest.GetDot() == 1)
             {
+                Debug.Log("画点");
                 DrawPoint(Start + ParamsGetter.GetDotePosition(), yPosition);
             }
 

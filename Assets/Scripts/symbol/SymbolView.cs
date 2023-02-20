@@ -117,7 +117,13 @@ namespace symbol
 
         protected void DrawPoint(float x, float y)
         {
-
+            GameObject DotObject = GameObject.Instantiate(CommonParams.GetPrefabDot(),
+            ParentObject.transform.position,
+            CommonParams.GetPrefabDot().transform.rotation);
+            DotObject.transform.SetParent(ParentObject.transform);
+            RectTransform DotRect = DotObject.GetComponent<RectTransform>();
+            // 设置附点位置
+            DotRect.localPosition = new Vector3(x,y,0);
         }
 
         protected abstract void OnDraw();

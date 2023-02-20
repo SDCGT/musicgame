@@ -60,10 +60,10 @@ namespace util
         public int GetNoteTailUpPortraitShift() { return 3 * _unit / 2; }
 
         // 音符符尾朝下时的中心纵向偏移
-        public int GetNoteTailDownPortraitShift() { return 3 * _unit / 2; }
+        public int GetNoteTailDownPortraitShift() { return 3 * _unit / 2;  }
 
         // 音符符尾朝上时的中心横向偏移
-        public int GetNoteTailUpLandscapeShift() { return _unit / 8; }
+        public int GetNoteTailUpLandscapeShift() { return 8*_unit / 8; }
 
         // 音符符尾朝下时的中心横向偏移
         public int GetNoteTailDownLandscapeShift() { return _unit / 8; }
@@ -87,7 +87,9 @@ namespace util
         }
 
         //  附点位置
-        public int GetDotePosition() { return GetNoteHeadWidth() + _unit / 2; }
+        public int GetDotePosition() {
+            return GetNoteHeadWidth() + 1*_unit / 2;
+        }
 
         //  第一个升降号位置
         public float GetFirstFifthsPosition() { return (float) (3.6 * _unit); }

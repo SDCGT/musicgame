@@ -12,6 +12,7 @@ namespace control
         private GameObject _prefabSymbol;
         private GameObject _prefabText;
         private GameObject _prefabLine;
+        private GameObject _prefabDot;
         private GameObject _prefabFileButton;
         private GameObject _MainMenuBtn;
         private GameObject _RestartBtn;
@@ -23,6 +24,7 @@ namespace control
             _prefabSymbol = (GameObject)Resources.Load("Prefabs/Prefab_Symbol");
             _prefabText = (GameObject)Resources.Load("Prefabs/Prefab_Text");
             _prefabLine = (GameObject)Resources.Load("Prefabs/Prefab_Line");
+            _prefabDot = (GameObject)Resources.Load("Prefabs/Prefab_Dot");
             _prefabFileButton = (GameObject)Resources.Load("Prefabs/Prefab_FileButton");
             _MainMenuBtn = (GameObject)Resources.Load("Prefabs/Main");
             _RestartBtn = (GameObject)Resources.Load("Prefabs/Restart");
@@ -32,6 +34,7 @@ namespace control
             _commonParams.SetPrefabSymbol(_prefabSymbol);
             _commonParams.SetPrefabText(_prefabText);
             _commonParams.SetPrefabLine(_prefabLine);
+            _commonParams.SetPrefabDot(_prefabDot);
             _commonParams.SetPrefabFileButton(_prefabFileButton);
             _commonParams.SetExitButton(_ExitBtn);
             _commonParams.SetMainMenuButton(_MainMenuBtn);
@@ -46,6 +49,7 @@ namespace control
             _commonParams.SetPrefabSymbol(_prefabSymbol);
             _commonParams.SetPrefabText(_prefabText);
             _commonParams.SetPrefabLine(_prefabLine);
+            _commonParams.SetPrefabDot(_prefabDot);
             _commonParams.SetPrefabFileButton(_prefabFileButton);
             _commonParams.SetExitButton(_ExitBtn);
             _commonParams.SetMainMenuButton(_MainMenuBtn);

@@ -27,9 +27,11 @@ namespace symbol
 
         protected override void OnDraw()
         {
+            Debug.Log(_note.GetDot());
             // 绘制定位线
             if (Cursor)
             {
+                Debug.Log("绘制定位线");
                 int tempStart = Start - 2 + Num * _note.GetSymbolWidth();
                 DrawLine(tempStart, 0, tempStart, ParamsGetter.GetTotalHeight());
             }
@@ -45,6 +47,7 @@ namespace symbol
 
             if (_note.GetDot() == 1)
             {
+                Debug.Log("绘制附点");
                 DrawPoint(Start + ParamsGetter.GetDotePosition(), yPosition);
             }
 

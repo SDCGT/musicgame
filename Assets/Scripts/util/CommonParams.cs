@@ -16,6 +16,7 @@ namespace util
         private GameObject _ExitBtn;
         private GameObject _RestartBtn;
         private GameObject _MainMenuBtn;
+        private GameObject _prefabDot;
 
         public static CommonParams GetInstance() { return instance; }
 
@@ -41,6 +42,10 @@ namespace util
         public GameObject GetPrefabLine() { return _prefabLine; }
 
         public void SetPrefabLine(GameObject prefabLine) { _prefabLine = prefabLine; }
+
+        public GameObject GetPrefabDot() { return _prefabDot; }
+
+        public void SetPrefabDot(GameObject prefabDot) { _prefabDot = prefabDot; }
 
         public GameObject GetPrefabText() { return _prefabText; }
 
