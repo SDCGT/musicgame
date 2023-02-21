@@ -17,6 +17,7 @@ namespace FinerGames.PitchDetector.Demo
         float pitch = 0;
         public TMP_Text score;
         public Timer time;
+        public int fullmark=100;
 
         void Start()
         {
@@ -46,6 +47,7 @@ namespace FinerGames.PitchDetector.Demo
                 data1.time = time.GetGameTime();
                 data1.Frequent = detector.MidiNote + detector.MidiCents * 0.01f+1.38f;
                 PitchRecord.SetSingList(data1);//记录唱歌的音高
+                StaticMusicInfo.SetSingName(detector.MidiNote + detector.MidiCents * 0.01f + 1.38f);
             }
         }
 
@@ -54,12 +56,20 @@ namespace FinerGames.PitchDetector.Demo
             if (collision.tag == "star")
             {
                 //Debug.Log("addScore");
+                int dif = (int)(Mathf.Abs(StaticMusicInfo.GetSingName() - StaticMusicInfo.GetScoreName()) * 10);
+                if(dif>100)
+                {
+                    dif = 40;//防止出现错帧
+                }
+                //Debug.Log(dif);
                 string scorestr;
                 int scoreint;
                 scorestr = score.text.ToString();
                 int.TryParse(scorestr, out scoreint);
-                scoreint +=1;
-                score.text = scoreint.ToString();
+                int addscore = fullmark - dif;
+                scoreint = scoreint + addscore;
+                StaticMusicInfo.SetScoring(scoreint);
+                score.text = scoreint.ToString();//计分
                 Destroy(collision.gameObject);
             }
         }

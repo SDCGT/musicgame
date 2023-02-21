@@ -75,6 +75,7 @@ namespace xmlParser
                 data.time = time.GetGameTime() + instance.prepeartime;
                 data.Frequent = instance.midiID;
                 PitchRecord.SetScoreList(data);//后台记录曲谱的音高
+                StaticMusicInfo.SetScoreName(instance.midiID);
             }
 
             if (time.GetGameTime() >= instance.endTime)

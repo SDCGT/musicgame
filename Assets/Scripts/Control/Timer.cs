@@ -18,7 +18,7 @@ using UnityEngine;
             bool end = false;
             endTime = StaticMusicInfo.GetEndTime();
             PitchRecord.ClearData();
-            Debug.Log(PitchRecord.GetScoreList().Count);
+            //Debug.Log(PitchRecord.GetScoreList().Count);
             
         }
 

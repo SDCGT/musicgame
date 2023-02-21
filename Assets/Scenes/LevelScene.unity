@@ -5287,6 +5287,7 @@ MonoBehaviour:
   playerMesh: {fileID: 432811906}
   score: {fileID: 583977649}
   time: {fileID: 251573236}
+  fullmark: 100
 --- !u!212 &432811906
 SpriteRenderer:
   m_ObjectHideFlags: 0
