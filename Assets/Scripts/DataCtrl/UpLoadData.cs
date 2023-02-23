@@ -51,7 +51,7 @@ public class UpLoadData : MonoBehaviour
         var compareList = new CompareDataGroup();
         int a = scoreList.Count;
         int b = singList.Count;
-        Debug.Log("1111111");
+        //Debug.Log("1111111");
         int count = Mathf.Min(a, b);
         string scorestring = scoreText.text;
         int.TryParse(scorestring, out score);

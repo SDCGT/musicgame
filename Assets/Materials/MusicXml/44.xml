@@ -323,7 +323,7 @@
         <duration>9</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <dot/>
+        <dot></dot>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -488,7 +488,7 @@
         <duration>18</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <dot/>
+        <dot></dot>
         <stem>up</stem>
         <staff>1</staff>
         </note>
@@ -662,7 +662,7 @@
         <duration>9</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <dot/>
+        <dot></dot>
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -742,7 +742,7 @@
         <duration>9</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <dot/>
+        <dot></dot>
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>

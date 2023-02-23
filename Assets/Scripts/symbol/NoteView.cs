@@ -47,7 +47,7 @@ namespace symbol
 
             if (_note.GetDot() == 1)
             {
-                Debug.Log("绘制附点");
+                //Debug.Log("绘制附点");
                 DrawPoint(Start + ParamsGetter.GetDotePosition(), yPosition);
             }
 

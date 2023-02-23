@@ -36,7 +36,7 @@ namespace xmlParser
             {
                 if(time.GetStartBool()&&!creating)
                 {
-                    InvokeRepeating("BornStar",0, 0.3f);
+                    InvokeRepeating("BornStar",0, interval);
                     creating = true;
                     //Debug.Log("playfirsttime");
                 }             

@@ -65,7 +65,7 @@ public class OptionAdd : MonoBehaviour
         string optionText = dropdown.options[index].text;
         StaticMusicInfo.SetScoreID("Assets/Materials/MusicXml/"+optionText);
         
-        Debug.Log("Dropdown option " + optionText + " was clicked.");
-        Debug.Log(StaticMusicInfo.GetScoreID());
+        //Debug.Log("Dropdown option " + optionText + " was clicked.");
+        //Debug.Log(StaticMusicInfo.GetScoreID());
     }
 }
