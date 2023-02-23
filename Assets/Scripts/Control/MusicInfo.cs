@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Xml;
 using symbol;
 using util;
+using System.IO;
 
 namespace xmlParser
 {
@@ -13,7 +14,8 @@ namespace xmlParser
 
         int midiID;
         double frequent = 0;
-        string ScoreName = CommonParams.GetInstance().GetScoreName();
+        string ScoreName = StaticMusicInfo.GetScoreID();
+
         XmlParser parser;
         private List<Symbol> SymbolMeasure = new List<Symbol>();
         private List<Note> NoteList = new List<Note>();

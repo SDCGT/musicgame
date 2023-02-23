@@ -9,14 +9,15 @@ namespace control
 {
     public class CanvasControl : MonoBehaviour
     {
-        private CommonParams _commonParams = CommonParams.GetInstance();
+        //private CommonParams _commonParams = CommonParams.GetInstance();
 
         // Use this for initialization
         private void Start()
         {
-//        DrawScore("Assets/Materials/example.xml");
-            string scoreName = _commonParams.GetScoreName();
+            //        DrawScore("Assets/Materials/example.xml");
+            string scoreName = StaticMusicInfo.GetScoreID();
 	        DrawScore(scoreName);
+            Debug.Log("scoreName" + scoreName);
 //            DrawScore("Assets/Materials/MusicXml/印第安鼓.xml");
         }
 
@@ -29,6 +30,7 @@ namespace control
         private void DrawScore(string filename)
         {
             // 解析MusicXml文件
+            Debug.Log("DrawScore" + filename);
             XmlFacade xmlFacade = new XmlFacade(filename);
             // 生成乐谱表
             ScoreGenerator scoreGenerator =
