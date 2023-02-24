@@ -206,7 +206,7 @@
         <duration>3</duration>
         <voice>1</voice>
         <type>16th</type>
-        <dot/>
+        <dot></dot>
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -400,7 +400,7 @@
         <duration>3</duration>
         <voice>1</voice>
         <type>16th</type>
-        <dot/>
+        <dot></dot>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -509,7 +509,7 @@
         <duration>6</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <dot/>
+        <dot></dot>
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -635,7 +635,7 @@
         <duration>6</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <dot/>
+        <dot></dot>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -683,7 +683,7 @@
         <duration>3</duration>
         <voice>1</voice>
         <type>16th</type>
-        <dot/>
+        <dot></dot>
         <stem>down</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
@@ -979,7 +979,7 @@
         <duration>6</duration>
         <voice>1</voice>
         <type>eighth</type>
-        <dot/>
+        <dot></dot>
         <stem>up</stem>
         <staff>1</staff>
         <beam number="1">begin</beam>
