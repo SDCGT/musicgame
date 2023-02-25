@@ -105,8 +105,12 @@ namespace xmlParser
                                 _symbol = new Rest();
                                 _symbol.SetChord(false);
                                 break;
+                            case "dot":
+                                _symbol.SetDot(1); // 附点
+                                break;
                             case "chord": // 和弦，由于和弦也是self closing <chord /> 的，所以也放在这里
                                 _isChord = true; break;
+                            
                         }
                     }
                     else if (xmlReader.NodeType == XmlNodeType.EndElement)
