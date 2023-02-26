@@ -10,6 +10,7 @@ public static class StaticMusicInfo
     private static float scoreName;
     private static int scoring;
     private static string scoreID;
+    private static string upLoadScoreId;
     private static string[] scoreIDs;
     public static float GetEndTime()
     {
@@ -73,6 +74,20 @@ public static class StaticMusicInfo
     public static void SetScoreID(string _scoreid)
     {
         scoreID = _scoreid;
+    }
+
+    public static string GetUploadScoreID()
+    {
+        if (Application.platform == RuntimePlatform.Android) // android
+        {
+            upLoadScoreId += Application.streamingAssetsPath;
+        }
+        return upLoadScoreId;
+    }
+
+    public static void SetUploadScoreID(string _scoreid)
+    {
+        upLoadScoreId = _scoreid;
     }
 
     public static void SetScoreIDs(string[] _scoreids)

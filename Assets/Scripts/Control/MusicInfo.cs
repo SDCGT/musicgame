@@ -53,7 +53,7 @@ namespace xmlParser
             int.TryParse(instance.beat.GetBeats(), out instance.beatint);
             int.TryParse(instance.beat.GetBeatType(), out instance.beattypeint);
             instance.allBeats = instance.beatint * instance.measureCount;
-            //Debug.Log("小节数" + instance.measureCount);
+            Debug.Log("小节数" + instance.measureCount);
             //Debug.Log("每小节多少拍" + instance.beatint);
             TotalTime();
             SetStartTime();

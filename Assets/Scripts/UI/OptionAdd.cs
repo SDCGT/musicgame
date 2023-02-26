@@ -10,8 +10,10 @@ public class OptionAdd : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
     public float dropdownWidth;
+    string path;
     void Start()
     {
+        path = Application.streamingAssetsPath + "/MusicXml";
         RectTransform template = dropdown.transform.Find("Template") as RectTransform;
 
         // 设置下拉菜单的宽度
@@ -42,10 +44,10 @@ public class OptionAdd : MonoBehaviour
 
     void CollectAllScores()
     {
-        string folderPath = Application.dataPath + "/Materials/MusicXml";
+        //string folderPath = Application.dataPath + "/Materials/MusicXml";
 
         // 获取文件夹内所有文件信息
-        DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
+        DirectoryInfo directoryInfo = new DirectoryInfo(path);
         FileInfo[] fileInfo = directoryInfo.GetFiles("*.xml");
 
         // 初始化文件名数组
@@ -63,8 +65,8 @@ public class OptionAdd : MonoBehaviour
     private void OnDropdownValueChanged(int index)
     {
         string optionText = dropdown.options[index].text;
-        StaticMusicInfo.SetScoreID("Assets/Materials/MusicXml/"+optionText);
-        
+        StaticMusicInfo.SetScoreID(path +"/"+ optionText);
+        StaticMusicInfo.SetUploadScoreID(optionText);
         //Debug.Log("Dropdown option " + optionText + " was clicked.");
         //Debug.Log(StaticMusicInfo.GetScoreID());
     }

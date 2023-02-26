@@ -106,7 +106,7 @@ namespace xmlParser
                                 _symbol.SetChord(false);
                                 break;
                             case "dot":
-                                _symbol.SetDot(1); // 附点
+                                _symbol.SetDot(1); // 附点,由于休止符是self closing <rest /> 的，所以放在这里
                                 break;
                             case "chord": // 和弦，由于和弦也是self closing <chord /> 的，所以也放在这里
                                 _isChord = true; break;
@@ -345,7 +345,7 @@ namespace xmlParser
         {
             switch (_beam)
             {
-                case "begin":
+                case "begin"://连音第一个音符
                     {
                         _slur = new Slur();
                         _slur.GetList().Add((Note)_symbol);
@@ -353,7 +353,7 @@ namespace xmlParser
                         ((Note)_symbol).SetNext(true);
                     }
                     break;
-                case "continue":
+                case "continue"://连音中间一个音符
                     {
                         _slur.GetList().Add((Note)_symbol);
                         ((Note)_symbol).SetLastNote((Note)symbolList[symbolList.Count - 1]);
@@ -362,7 +362,7 @@ namespace xmlParser
                         ((Note)_symbol).SetNext(true);
                     }
                     break;
-                case "end":
+                case "end"://连音最后一个音符
                     {
                         Note lastNote = (Note)symbolList[symbolList.Count - 1];
                         _slur.GetList().Add((Note)_symbol);

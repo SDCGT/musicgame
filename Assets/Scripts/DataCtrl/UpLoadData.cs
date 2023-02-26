@@ -39,11 +39,11 @@ public class UpLoadData : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(GetRequest(url));
-        recordString = "ID:"+UserInfo.GetID();
+        //StartCoroutine(GetUnityRequest(url));
+        recordString = "ID:"+UserInfo.GetID()+"ScoreID:"+StaticMusicInfo.GetUploadScoreID();
         GameObject canvus= GameObject.Find("Score");
         scoreText = canvus.GetComponent<TMP_Text>();
-}
+    }
     public void UpLoad()
     {
         scoreList = PitchRecord.GetScoreList();
@@ -76,14 +76,16 @@ public class UpLoadData : MonoBehaviour
 
         string filePath = Application.dataPath + "/Data/data.json";
         File.WriteAllText(filePath, recordString);//存储到本地json文件
-        StartCoroutine(GetRequest(url + recordString));//发送文本到云端
+        //StartCoroutine(GetRequest(url + recordString));//发送文本到云端
+        //StartCoroutine(GetUnityRequest(url + recordString));//发送文本到云端
+                                                            //string json = JsonUtility.ToJson(compareList);//
 
-        //string json = JsonUtility.ToJson(compareList);//
-
-
+        WebClient client = new WebClient();
+        client.DownloadStringAsync(new System.Uri(url+recordString+"end"));
+        client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadCompleted);
     }
 
-    IEnumerator GetRequest(string url)
+   /* IEnumerator GetRequest(string url)
     {
         HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
@@ -96,8 +98,38 @@ public class UpLoadData : MonoBehaviour
             }
          }
         yield return null;
+    }*/
+
+    private IEnumerator GetUnityRequest(string url)
+    {
+        UnityWebRequest www = UnityWebRequest.Get(url);
+
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+        }
+        yield return www.SendWebRequest();
     }
-        
+
+
+
+    void DownloadCompleted(object sender, DownloadStringCompletedEventArgs args)
+    {
+        if (args.Error != null)
+        {
+            Debug.Log(args.Error.Message);
+        }
+        else
+        {
+            Debug.Log(args.Result);
+        }
+    }
 }
   
 
