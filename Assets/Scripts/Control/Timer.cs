@@ -10,6 +10,9 @@ using UnityEngine;
         float endTime;//视唱结束时间
         bool start;
         bool end;
+        public delegate void EndGame();
+
+        public static event EndGame EndUI;
         void Start()
         {
             playTime = 0;
@@ -39,6 +42,7 @@ using UnityEngine;
 
             if (start && playTime >= ((endTime) + StaticMusicInfo.GetPrepearTime())&&!end)
             {
+                TriggerEnd();
                 upLoadData1.SendMessage("UpLoad");
                 end = true;
             }
@@ -54,5 +58,13 @@ using UnityEngine;
             return start;
         }
 
+        public static void TriggerEnd()
+        {
 
+        if (EndUI != null)
+        {
+            Debug.Log("Trigger");
+            EndUI();
+        }
+        }
     }

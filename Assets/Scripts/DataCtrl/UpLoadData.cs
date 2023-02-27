@@ -5,6 +5,9 @@ using System.IO;
 using System.Net;
 using UnityEngine.Networking;
 using TMPro;
+using util;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UpLoadData : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class UpLoadData : MonoBehaviour
     public static int starCount;
     public TMP_Text scoreText;
     private string url = "http://43.136.68.90:13763/insert?goal=";
+
 
     [System.Serializable]
     public class CompareData
@@ -83,6 +87,7 @@ public class UpLoadData : MonoBehaviour
         WebClient client = new WebClient();
         client.DownloadStringAsync(new System.Uri(url+recordString+"end"));
         client.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownloadCompleted);
+
     }
 
    /* IEnumerator GetRequest(string url)
@@ -130,6 +135,8 @@ public class UpLoadData : MonoBehaviour
             Debug.Log(args.Result);
         }
     }
+
+    
 }
   
 
