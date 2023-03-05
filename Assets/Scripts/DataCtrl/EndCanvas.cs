@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using util;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndCanvas : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private GameObject _parentObject;
+    private List<float> _screenSize;
+    private CommonParams _commonParams = CommonParams.GetInstance();
+
+    GameObject MainMenuBtn;
+    GameObject RestartBtn;
+    GameObject ExitBtn;
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -15,4 +23,10 @@ public class EndCanvas : MonoBehaviour
     {
         
     }
+
+    private void InitiateEndMenu()
+    {
+
+    }
+
 }

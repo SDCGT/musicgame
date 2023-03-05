@@ -4981,6 +4981,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upLoadData1: {fileID: 1357002646}
+  ResartBtn: {fileID: 6188718312504462102, guid: 4d6bd906c92da0242ad347ad31883c50, type: 3}
+  QuitBtn: {fileID: 4496770364300403010, guid: 6f4fccf697a25bd4fb3e98f5c26d50ed, type: 3}
+  MainBtn: {fileID: 618073025800699971, guid: bd3bc588569149c44bb1840348461282, type: 3}
+  _parentObject: {fileID: 1506767384}
+  ResartBtn1: {fileID: 0}
+  QuitBtn1: {fileID: 0}
+  MainBtn1: {fileID: 0}
 --- !u!4 &251573237
 Transform:
   m_ObjectHideFlags: 0
@@ -6361,6 +6368,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1506767384 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2582654086758417656, guid: 48dc4812478e7a846b0e153ed0311727, type: 3}
+  m_PrefabInstance: {fileID: 252446407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540165815
 GameObject:
   m_ObjectHideFlags: 0
