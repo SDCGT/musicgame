@@ -14,7 +14,7 @@ print(dir_path)
 
 #path to one of the archives
 #midi_path = sys.argv[1]
-midi_path="G:\学位论文\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI"
+midi_path="D:\Game\music\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI"
 
 def open_midi(midi_path):
     mf = midi.MidiFile()
@@ -150,9 +150,9 @@ def pitch_interval_entropy(en):
     return result
 
 
-with open(os.path.join(midi_path, 'evaluation.csv'), newline='') as csvfile:
+with open(os.path.join(midi_path, 'test_evaluation.csv'), newline='') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=';')
-    with open(os.path.join(midi_path, 'analysis.csv'), 'a') as f:
+    with open(os.path.join(midi_path, 'test_analysis.csv'), 'a') as f:
         output = 'TITLE' + ";" + 'YEAR_FOR_ANALYSIS' + ";" + 'TONAL_CERTAINTY_PIECE' + ";" + 'MEAN_TONAL_CERTAINTY_MEASURES' + ";" + 'PITCH_CLASS_ENTROPY_PIECE' + ";" + 'MEAN_PITCH_CLASS_ENTROPY_MEASURES' + ";" + 'MELODIC_INTERVAL_ENTROPY_PIECE' + ";" + 'MAX_MEAN_MELODIC_INTERVAL_ENTROPY_MEASURES' + ";" + 'IOI_ENTROPY_MEASURES' + ";" + 'MAX_MEAN_IOI_ENTROPY_MEASURES' + ";" + 'LENGTH' + "\n"
         print(output)
         f.write(output)
@@ -224,7 +224,7 @@ with open(os.path.join(midi_path, 'evaluation.csv'), newline='') as csvfile:
                         Hpi_list_measures = []
                         mean_Hpi_measures = []
                         if last_measure > measures_count:
-                            mean_Hpi_measures = max_Hpi_piece
+                            mean_Hpi_measures = [max_Hpi_piece] # fix var not iterable  --by ske
                         else:
                             while last_measure <= measures_count:
                                 Hpi_list_measures.append(0 - sum(pitch_interval_entropy(extract_notes_melody(midi_part.measures(first_measure,last_measure)))))
@@ -239,7 +239,7 @@ with open(os.path.join(midi_path, 'evaluation.csv'), newline='') as csvfile:
                         Hioi_list_measures = []
                         mean_Hioi_measures = []
                         if last_measure > measures_count:
-                            mean_Hioi_measures = max_Hpi_piece
+                            mean_Hioi_measures = [max_Hpi_piece]  # fix var not iterable  --by ske
                         else:
                             while last_measure <= measures_count:
                                 Hioi_list_measures.append(0 - sum(ioi_entropy(extract_ioi(midi_part.measures(first_measure,last_measure)))))
@@ -252,7 +252,7 @@ with open(os.path.join(midi_path, 'evaluation.csv'), newline='') as csvfile:
                     max_mean_Hioi_measures = max(mean_Hioi_measures)
 
 
-                    with open(os.path.join(midi_path, 'analysis.csv'), 'a') as f:
+                    with open(os.path.join(midi_path, 'test_analysis.csv'), 'a') as f:
                         #output = row['TITLE'] + ";" + row['YEAR_FOR_ANALYSIS'] + ";" + str(k_piece) + ";" + str(mean_k_measures) + ";" + str(Hpc_piece) + ";" + str(mean_Hpc_measures) + ";" + str(max_Hpi_piece) + ";" + str(max_mean_Hpi_measures) + ";" + str(max_Hioi_piece) + ";" + str(max_mean_Hioi_measures) + ";" + row['LENGTH'] + "\n"
                         output = row['TITLE'] + str(k_piece) + ";" + str(
                             mean_k_measures) + ";" + str(Hpc_piece) + ";" + str(mean_Hpc_measures) + ";" + str(

@@ -32,12 +32,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "G:/学位论文/musicgame/曲目复杂度/music-complexity-master/music-complexity-master/corpus/MIDI",
+    "last_opened_file_path": "D:/Game/music/musicgame/曲目复杂度/music-complexity-master/music-complexity-master/corpus/MIDI",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Game\music\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI" />
       <recent name="G:\学位论文\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI" />
       <recent name="G:\学位论文\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\XML" />
     </key>
@@ -52,5 +53,32 @@
       <updated>1679120711723</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/extract_features.py</url>
+          <line>160</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/extract_features.py</url>
+          <line>163</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
