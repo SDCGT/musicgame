@@ -14,8 +14,8 @@ print(dir_path)
 
 #path to one of the archives
 #midi_path = sys.argv[1]
-midi_path="D:\Game\music\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI"
-
+#midi_path="D:\Game\music\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI"
+midi_path="G:\学位论文\musicgame\曲目复杂度\music-complexity-master\music-complexity-master\corpus\MIDI";
 def open_midi(midi_path):
     mf = midi.MidiFile()
     mf.open(midi_path)
