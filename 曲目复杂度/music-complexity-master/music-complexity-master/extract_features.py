@@ -21,7 +21,6 @@ def open_midi(midi_path):
     mf.open(midi_path)
     mf.read()
     mf.close()
-
     return midi.translate.midiFileToStream(mf)
 
 

@@ -54,6 +54,7 @@ public class Timer : MonoBehaviour
                 end = true;
             }
 
+
     }
         public float GetGameTime()
         {

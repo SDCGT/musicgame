@@ -18,6 +18,7 @@ namespace FinerGames.PitchDetector.Demo
         public TMP_Text score;
         public Timer time;
         public int fullmark=100;
+        public SpriteRenderer light;
 
         void Start()
         {
@@ -60,6 +61,7 @@ namespace FinerGames.PitchDetector.Demo
                 if(dif>100)
                 {
                     dif = 40;//∑¿÷π≥ˆœ÷¥Ì÷°
+                    light.color = new Color(light.color.r, light.color.g, light.color.b, (light.color.a + 0.1f));
                 }
                 //Debug.Log(dif);
                 string scorestr;

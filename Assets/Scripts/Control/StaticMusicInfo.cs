@@ -9,7 +9,7 @@ public static class StaticMusicInfo
     private static float singName;
     private static float scoreName;
     private static int scoring;
-    private static string scoreID;
+    private static string scoreID= "Assets/Materials/MusicXml/2.xml";
     private static string upLoadScoreId;
     private static string[] scoreIDs;
     public static float GetEndTime()
